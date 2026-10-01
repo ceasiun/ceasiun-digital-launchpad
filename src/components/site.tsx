@@ -18,6 +18,7 @@ import {
   Newspaper,
   Phone,
   Twitter,
+  User,
   Users,
   X,
   Youtube,
@@ -95,7 +96,6 @@ const mobileNavIcons = {
         </nav>
 
         <div className="nav-actions">
-          <Link href="/auth" className="header-login">Login</Link>
           <Button asChild size="lg" className="project-cta">
             <Link href="/contact">
               {settings.headerCta} <ArrowUpRight />
@@ -110,6 +110,9 @@ const mobileNavIcons = {
           >
             {open ? <X /> : <Menu />}
           </Button>
+          <Link href="/auth" className="header-login" aria-label="Login">
+            <User className="w-5 h-5" />
+          </Link>
         </div>
       </div>
 
@@ -263,7 +266,7 @@ export function CTA() {
   const { cta } = useCms();
 
   return (
-    <section className="cta-band">
+    <section style={{margin: "30px 0px 0px 0px"}} className="cta-band">
       <div className="shell">
         <p className="eyebrow">{cta.eyebrow}</p>
         <h2>{cta.title}</h2>

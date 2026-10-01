@@ -2,31 +2,32 @@
 import Link from "next/link";
 import { ArrowRight, Check, MoveRight } from "lucide-react";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
+import TechBackground from "@/components/TechBackground";
 import { CountUp } from "@/components/count-up";
 import { useTestimonials } from "@/components/public-content";
 import { CTA, Layout, SectionHead, meta } from "@/components/site";
 import { Button } from "@/components/ui/button";
+import HowItWorks02 from "@/components/ui/how-it-works-02";
 import { useCms, useCmsServices } from "@/hooks/use-cms";
-import hero from "@/assets/ceasiun-hero.jpg";
+import ShapeGrid from "@/components/ShapeGrid";
 
 export default function HomePage() {
-  const cms = useCms();
+  const cms = useCms(); 
   const services = useCmsServices();
   const testimonials = useTestimonials();
 
   return (
     <Layout>
-      <section className="hero">
-        <img src={hero.src} width={1600} height={1008} alt={cms.home.heroAlt} fetchPriority="high" />
+      <section style={{ width: '100%', height: '600px', position: 'relative' }} className="hero">
+        {/* <TechBackground scale={1.5} gridMul={[2, 1]} digitSize={1.2} timeScale={0.5} pause={false} scanlineIntensity={0.5} glitchAmount={1} flickerAmount={1} noiseAmp={1} chromaticAberration={0} dither={0} curvature={0.1} tint="#00fdceff" mouseReact mouseStrength={0.5} pageLoadAnimation brightness={0.6}/> */}
+        <ShapeGrid speed={0.5} squareSize={30} direction="up" borderColor="#c1c1c1ff" hoverFillColor="#22222" hoverTrailAmount={0} shape='hexagon'/>
         <div className="hero-shade" />
         <div className="shell hero-content">
           <p className="eyebrow">{cms.home.heroEyebrow}</p>
           <h1>{cms.home.heroTitle}</h1>
           <p>{cms.home.heroCopy}</p>
-<Button asChild size="lg" className="project-cta">
-          <Link  href="/contact">
-              {cms.home.heroCta} <ArrowRight />
-            </Link>
+          <Button asChild size="lg" className="project-cta">
+            <Link href="/contact">{cms.home.heroCta}</Link>
           </Button>
         </div>
       </section>
@@ -46,7 +47,6 @@ export default function HomePage() {
                 <Icon />
                 <h3>{service.title}</h3>
                 <p>{service.short}</p>
-                <MoveRight />
               </Link>
             );
           })}
@@ -99,17 +99,15 @@ export default function HomePage() {
         )}
       </section>
 
-      <section className="section shell home-process">
-        <SectionHead eyebrow={cms.process.eyebrow} title={cms.process.title} copy={cms.process.copy} />
-        <div className="home-process-grid">
-          {cms.process.steps.map((step, index) => (
-            <article className="process-card" key={step.title}>
-              <div className="process-card-head"><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3></div>
-              <p>{step.description}</p>
-            </article>
-          ))}
+      <section style={{paddingTop:"0px"}} className="section home-process">
+        <HowItWorks02
+          eyebrow={cms.process.eyebrow}
+          heading={cms.process.title}
+          steps={cms.process.steps}
+        />
+        <div className="shell" style={{ display: "flex", justifyContent: "center", marginTop: "-1rem" }}>
+          <Button asChild size="lg" className="premium-button"><Link href="/contact">Start with a clear plan</Link></Button>
         </div>
-        <Button asChild size="lg" className="premium-button"><Link href="/contact">Start with a clear plan</Link></Button>
       </section>
 
       <section className="section shell faq">
