@@ -1667,6 +1667,24 @@ blockquote em {
 @media (max-width: 420px) { .shell { width: min(100% - 1.5rem, 1180px); } .hero-lede { font-size: 1rem; } .hero-note { align-items: flex-start; line-height: 1.5; } .faq-tabs { gap: .35rem; } .faq-tabs button { flex: 1; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .hero-tech-field *, .new-hero-inner, .process-line::before { animation: none !important; } }
 
+  /* Considered approach: a single, premium workflow system */
+  .approach-section { position: relative; overflow: hidden; }
+  .approach-section::before { position: absolute; top: 5rem; right: -12rem; width: 28rem; height: 28rem; content: ""; border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); border-radius: 50%; opacity: .7; pointer-events: none; }
+  .approach-section .section-intro { position: relative; z-index: 1; max-width: 850px; }
+  .approach-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .75rem; margin-top: 4.5rem; }
+  .approach-steps::before { position: absolute; top: 2rem; right: 4%; left: 4%; height: 1px; content: ""; background: repeating-linear-gradient(90deg, var(--primary) 0 5px, transparent 5px 13px); opacity: .55; animation: process-dash 3.5s linear infinite; }
+  .approach-step { position: relative; z-index: 1; display: flex; min-height: 238px; flex-direction: column; padding: 1rem; border: 1px solid var(--border); border-radius: 1.1rem; background: linear-gradient(160deg, color-mix(in oklab, var(--card) 96%, var(--primary)), color-mix(in oklab, var(--background) 88%, var(--card))); box-shadow: 0 15px 40px color-mix(in oklab, var(--background) 65%, transparent); transition: transform 260ms cubic-bezier(.22,1,.36,1), border-color 220ms ease, box-shadow 260ms ease; }
+  .approach-step:hover { transform: translateY(-9px); border-color: color-mix(in oklab, var(--primary) 60%, var(--border)); box-shadow: 0 22px 45px color-mix(in oklab, var(--primary) 13%, transparent); }
+  .approach-step-top { display: flex; align-items: center; justify-content: space-between; }
+  .approach-index { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: 50%; color: var(--primary); font: 700 .75rem var(--font-display); background: color-mix(in oklab, var(--primary) 10%, transparent); }
+  .approach-icon { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 1px solid var(--border); border-radius: .7rem; color: var(--primary); background: color-mix(in oklab, var(--background) 55%, transparent); }
+  .approach-stage { margin-top: auto; color: var(--primary); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; }
+  .approach-step h3 { margin: .55rem 0 .5rem; font: 600 1.05rem var(--font-display); }
+  .approach-step p { margin: 0; color: var(--muted-foreground); font-size: .85rem; line-height: 1.5; }
+  @media (max-width: 1050px) { .approach-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } .approach-steps::before { display: none; } .approach-step { min-height: 205px; } }
+  @media (max-width: 640px) { .approach-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 3rem; } .approach-step { min-height: 190px; padding: .9rem; } .approach-step h3 { font-size: .98rem; } }
+  @media (max-width: 390px) { .approach-steps { grid-template-columns: 1fr; } .approach-step { min-height: 150px; } .approach-stage { margin-top: 1.5rem; } }
+
   .article .byline { margin: 1.5rem 0; line-height: 1.6; }
   .article > img { margin: 1.5rem 0; }
   .prose ul { padding-left: 1.25rem !important; }
