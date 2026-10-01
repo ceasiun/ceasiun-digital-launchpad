@@ -46,14 +46,27 @@ function ServiceExplorer() {
   );
 }
 
+const faqGroups = [
+  { label: "General", items: faqs.slice(0, 2) },
+  { label: "Services", items: [["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."]] },
+  { label: "Payments", items: [faqs[3]] },
+];
+
 function Faq() {
+  const [activeGroup, setActiveGroup] = useState(0);
   const [open, setOpen] = useState(0);
-  return <div className="faq-list">{faqs.map(([question, answer], index) => (
-    <div className={`faq-item ${open === index ? "is-open" : ""}`} key={question}>
-      <button aria-expanded={open === index} onClick={() => setOpen(open === index ? -1 : index)}><span>{question}</span>{open === index ? <Minus size={20} /> : <Plus size={20} />}</button>
-      {open === index && <p>{answer}</p>}
+  const group = faqGroups[activeGroup];
+  return <div className="faq-system">
+    <div className="faq-tabs" role="tablist" aria-label="FAQ categories">
+      {faqGroups.map((item, index) => <button key={item.label} role="tab" aria-selected={activeGroup === index} className={activeGroup === index ? "is-active" : ""} onClick={() => { setActiveGroup(index); setOpen(0); }}>{item.label}<span>{String(item.items.length).padStart(2, "0")}</span></button>)}
     </div>
-  ))}</div>;
+    <div className="faq-list" role="tabpanel">{group.items.map(([question, answer], index) => (
+      <div className={`faq-item ${open === index ? "is-open" : ""}`} key={question}>
+        <button aria-expanded={open === index} onClick={() => setOpen(open === index ? -1 : index)}><span>{question}</span>{open === index ? <Minus size={20} /> : <Plus size={20} />}</button>
+        {open === index && <p>{answer}</p>}
+      </div>
+    ))}</div>
+  </div>;
 }
 
 export default function HomePage() {
@@ -61,6 +74,7 @@ export default function HomePage() {
     <a className="skip-link" href="#main">Skip to content</a>
     <div id="top" className="new-home">
       <section className="new-hero" aria-labelledby="hero-title">
+        <div className="hero-tech-field" aria-hidden="true"><span className="tech-orbit orbit-one" /><span className="tech-orbit orbit-two" /><span className="tech-orbit orbit-three" /><span className="tech-grid" /><span className="tech-cross cross-one" /><span className="tech-cross cross-two" /></div>
         <div className="hero-grid-mark" aria-hidden="true"><span /><span /><span /><span /></div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
@@ -83,7 +97,7 @@ export default function HomePage() {
 
         <section id="why" className="new-section why-section"><div className="shell why-grid"><div><p className="eyebrow">Why Ceasiun</p><h2>Technical depth, explained plainly.</h2></div><div className="why-list"><div><span>01</span><h3>Requirements before recommendations</h3><p>We start with the problem to solve, not a package to sell.</p></div><div><span>02</span><h3>Connected thinking</h3><p>Brand, software, marketing and infrastructure can work as one system.</p></div><div><span>03</span><h3>Clarity at every milestone</h3><p>You know what is being delivered, reviewed and decided next.</p></div></div></div></section>
 
-        <section id="process" className="new-section process-section"><div className="shell"><div className="section-intro"><p className="eyebrow">How it works</p><h2>A simple path from question to delivery.</h2></div><div className="process-line">{["Discussion", "Discovery", "Planning", "Execute", "Review", "Delivery", "Support"].map((step, index) => <div key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></div>)}</div></div></section>
+        <section id="process" className="new-section process-section"><div className="shell"><div className="section-intro"><p className="eyebrow">How it works</p><h2>A simple path from question to delivery.</h2></div><div className="process-line" aria-label="Project process">{["Discussion", "Discovery", "Planning", "Execute", "Review", "Delivery", "Support"].map((step, index) => <div key={step} className="process-step"><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></div>)}</div></div></section>
 
         <section id="work" className="new-section work-section"><div className="shell work-placeholder"><div><p className="eyebrow">Selected work</p><h2>Good work should be easy to verify.</h2></div><p>Client stories and project results will appear here as approved case studies are ready to share. We would rather show an honest blank space than make a claim without context.</p></div></section>
 
