@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Check, ChevronDown, Minus, Plus } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
 import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
 import { useState } from "react";
@@ -24,24 +24,17 @@ const faqs = [
 ];
 
 function ServiceExplorer() {
-  const [active, setActive] = useState(0);
-  const service = serviceAreas[active];
   return (
-    <div className="service-explorer">
-      <div className="service-list" role="tablist" aria-label="Service areas">
-        {serviceAreas.map((item, index) => (
-          <button key={item.title} role="tab" aria-selected={active === index} className={active === index ? "is-active" : ""} onClick={() => setActive(index)}>
-            <span>{String(index + 1).padStart(2, "0")}</span><strong>{item.title}</strong><ArrowUpRight aria-hidden="true" />
-          </button>
-        ))}
-      </div>
-      <div className="service-detail" role="tabpanel">
-        <p className="eyebrow">{String(active + 1).padStart(2, "0")} / 07</p>
-        <h3>{service.title}</h3>
-        <p>{service.detail}</p>
-        <ul>{service.tags.map((tag) => <li key={tag}><Check size={16} />{tag}</li>)}</ul>
-        <Link className="text-link" href={services[active]?.slug ? `/services/${services[active].slug}` : "/services"}>Explore capability <ArrowUpRight size={17} /></Link>
-      </div>
+    <div className="service-cards" aria-label="Service areas">
+      {serviceAreas.map((service, index) => (
+        <Link className="service-detail service-card-static" href={services[index]?.slug ? `/services/${services[index].slug}` : "/services"} key={service.title}>
+          <div className="service-card-top"><span className="eyebrow">{String(index + 1).padStart(2, "0")} / 07</span><ArrowUpRight aria-hidden="true" /></div>
+          <h3>{service.title}</h3>
+          <p>{service.detail}</p>
+          <ul>{service.tags.map((tag) => <li key={tag}><Check size={15} />{tag}</li>)}</ul>
+          <span className="card-link">Explore capability <ArrowUpRight size={16} /></span>
+        </Link>
+      ))}
     </div>
   );
 }
@@ -75,7 +68,6 @@ export default function HomePage() {
     <div id="top" className="new-home">
       <section className="new-hero" aria-labelledby="hero-title">
         <div className="hero-tech-field" aria-hidden="true"><span className="tech-orbit orbit-one" /><span className="tech-orbit orbit-two" /><span className="tech-orbit orbit-three" /><span className="tech-grid" /><span className="tech-cross cross-one" /><span className="tech-cross cross-two" /></div>
-        <div className="hero-grid-mark" aria-hidden="true"><span /><span /><span /><span /></div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
           <h1 id="hero-title">Take your business online.<br /><em>Build it to grow.</em></h1>
@@ -97,7 +89,7 @@ export default function HomePage() {
 
         <section id="why" className="new-section why-section"><div className="shell why-grid"><div><p className="eyebrow">Why Ceasiun</p><h2>Technical depth, explained plainly.</h2></div><div className="why-list"><div><span>01</span><h3>Requirements before recommendations</h3><p>We start with the problem to solve, not a package to sell.</p></div><div><span>02</span><h3>Connected thinking</h3><p>Brand, software, marketing and infrastructure can work as one system.</p></div><div><span>03</span><h3>Clarity at every milestone</h3><p>You know what is being delivered, reviewed and decided next.</p></div></div></div></section>
 
-        <section id="process" className="new-section process-section"><div className="shell"><div className="section-intro"><p className="eyebrow">How it works</p><h2>A simple path from question to delivery.</h2></div><div className="process-line" aria-label="Project process">{["Discussion", "Discovery", "Planning", "Execute", "Review", "Delivery", "Support"].map((step, index) => <div key={step} className="process-step"><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></div>)}</div></div></section>
+        <section id="process" className="new-section process-section"><div className="shell"><div className="section-intro"><p className="eyebrow">How it works</p><h2>A simple path from question to delivery.</h2></div><div className="process-line" aria-label="Project process">{[["Discussion", "Align on the goal", Search], ["Discovery", "Understand the context", ClipboardCheck], ["Planning", "Shape the right scope", SlidersHorizontal], ["Execute", "Build with momentum", Rocket], ["Review", "Refine what matters", ClipboardCheck], ["Delivery", "Launch with confidence", Truck], ["Support", "Keep improving", Headphones]].map(([step, detail, Icon], index) => { const StepIcon = Icon; return <div key={step} className="process-step"><div className="process-icon"><StepIcon size={18} /></div><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong><p>{detail}</p></div>; })}</div></div></section>
 
         <section id="work" className="new-section work-section"><div className="shell work-placeholder"><div><p className="eyebrow">Selected work</p><h2>Good work should be easy to verify.</h2></div><p>Client stories and project results will appear here as approved case studies are ready to share. We would rather show an honest blank space than make a claim without context.</p></div></section>
 
