@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
 import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const serviceAreas = [
   { title: "Website Development", detail: "Websites and commerce experiences built around how your business needs to work.", tags: ["Websites", "E-commerce", "Web apps"] },
@@ -22,6 +22,28 @@ const faqs = [
   ["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."],
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
+
+function CountUpMetric({ value, label }: { value: string; label: string }) {
+  const numericValue = Number.parseFloat(value);
+  const suffix = value.replace(String(numericValue), "");
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const duration = 1200;
+    const start = performance.now();
+    const frame = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(numericValue * eased);
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    const animationFrame = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [numericValue]);
+
+  const formatted = numericValue % 1 === 0 ? Math.round(count).toString() : count.toFixed(1);
+  return <div><strong>{formatted}{suffix}</strong><span>{label}</span></div>;
+}
 
 function ServiceExplorer() {
   return (
@@ -87,7 +109,7 @@ export default function HomePage() {
         <div className="hero-index" aria-hidden="true">01 <span /> 07</div>
       </section>
 
-      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></section>
+      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <CountUpMetric key={label} value={value} label={label} />)}</div></section>
 
       <main id="main">
         <section id="problem" className="new-section problem-section"><div className="shell problem-grid"><div><p className="eyebrow">The gap</p><h2>Digital should make business clearer, not more complicated.</h2></div><div className="problem-copy"><p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p><p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p><Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link></div></div></section>

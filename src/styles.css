@@ -1562,16 +1562,16 @@ blockquote em {
 .hero-index span { width: 5rem; height: 1px; background: var(--border); }
 .trust-strip { border-bottom: 1px solid var(--border); }
  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
- .trust-grid div { display: grid; gap: .5rem; padding: 2rem 1rem; border-right: 1px solid var(--border); animation: metric-rise 700ms cubic-bezier(.2,.8,.2,1) both; }
+ .trust-grid div { display: grid; gap: .5rem; padding: 2rem 1rem; border-right: 1px solid var(--border); animation: metric-in-out 900ms cubic-bezier(.2,.8,.2,1) both; }
  .trust-grid div:nth-child(2) { animation-delay: 90ms; }
  .trust-grid div:nth-child(3) { animation-delay: 180ms; }
  .trust-grid div:nth-child(4) { animation-delay: 270ms; }
  .trust-grid div:first-child { border-left: 1px solid var(--border); }
- .trust-grid strong { font: 700 clamp(2rem, 4vw, 3.5rem)/1 var(--font-display); animation: metric-glow 2.4s ease-in-out 900ms both; }
+ .trust-grid strong { font: 700 clamp(2rem, 4vw, 3.5rem)/1 var(--font-display); letter-spacing: -.04em; }
  .trust-grid span, .eyebrow { color: var(--muted-foreground); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
- @keyframes metric-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
- @keyframes metric-glow { 0%, 100% { text-shadow: none; } 45% { text-shadow: 0 0 1.2rem color-mix(in oklab, var(--primary) 40%, transparent); } }
- @media (prefers-reduced-motion: reduce) { .trust-grid div, .trust-grid strong { animation: none; } }
+ @keyframes metric-in-out { 0% { opacity: 0; transform: translateY(14px) scale(.98); } 65% { opacity: 1; transform: translateY(-2px) scale(1.01); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+
+ @media (prefers-reduced-motion: reduce) { .trust-grid div { animation: none; } }
 .problem-grid, .why-grid, .faq-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 10vw, 9rem); }
 .new-section h2 { max-width: 680px; margin: 1.5rem 0; font: 700 clamp(2.5rem, 5vw, 5.5rem)/.95 var(--font-display); letter-spacing: -.07em; }
 .problem-copy, .section-intro > p:not(.eyebrow), .work-placeholder > p { max-width: 560px; color: var(--muted-foreground); line-height: 1.75; font-size: 1.05rem; }
@@ -3609,7 +3609,7 @@ blockquote em {
   }
 }
 
-/* ══════════════��═════════════════════════════════════════��══════════
+/* ══════════��═══��═════════════════════════════════════════��══════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
 ════════════════════════════���════════════════════════���═════════════ */
 .cms-editor {
