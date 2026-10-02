@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
 import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const serviceAreas = [
   { title: "Website Development", detail: "Websites and commerce experiences built around how your business needs to work.", tags: ["Websites", "E-commerce", "Web apps"] },
@@ -22,6 +22,28 @@ const faqs = [
   ["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."],
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
+
+function CountUpMetric({ value, label }: { value: string; label: string }) {
+  const numericValue = Number.parseFloat(value);
+  const suffix = value.replace(String(numericValue), "");
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const duration = 1200;
+    const start = performance.now();
+    const frame = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(numericValue * eased);
+      if (progress < 1) requestAnimationFrame(frame);
+    };
+    const animationFrame = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [numericValue]);
+
+  const formatted = numericValue % 1 === 0 ? Math.round(count).toString() : count.toFixed(1);
+  return <div><strong>{formatted}{suffix}</strong><span>{label}</span></div>;
+}
 
 function ServiceExplorer() {
   return (
@@ -67,7 +89,16 @@ export default function HomePage() {
     <a className="skip-link" href="#main">Skip to content</a>
     <div id="top" className="new-home">
       <section className="new-hero" aria-labelledby="hero-title">
-        <div className="hero-tech-field" aria-hidden="true"><span className="tech-orbit orbit-one" /><span className="tech-orbit orbit-two" /><span className="tech-orbit orbit-three" /><span className="tech-grid" /><span className="tech-cross cross-one" /><span className="tech-cross cross-two" /></div>
+        <div className="hero-tech-field" aria-hidden="true">
+          <div className="signal-plane signal-plane-back" />
+          <div className="signal-plane signal-plane-mid" />
+          <div className="signal-plane signal-plane-front" />
+          <div className="signal-route route-one"><i /><i /><i /></div>
+          <div className="signal-route route-two"><i /><i /><i /></div>
+          <div className="signal-route route-three"><i /><i /></div>
+          <span className="data-node data-node-one" /><span className="data-node data-node-two" /><span className="data-node data-node-three" />
+          <div className="system-readout"><span>LIVE SYSTEM</span><b /><small>CONNECTED / 07</small></div>
+        </div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
           <h1 id="hero-title">Take your business online.<br /><em>Build it to grow.</em></h1>
@@ -78,12 +109,12 @@ export default function HomePage() {
         <div className="hero-index" aria-hidden="true">01 <span /> 07</div>
       </section>
 
-      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></section>
+      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <CountUpMetric key={label} value={value} label={label} />)}</div></section>
 
       <main id="main">
         <section id="problem" className="new-section problem-section"><div className="shell problem-grid"><div><p className="eyebrow">The gap</p><h2>Digital should make business clearer, not more complicated.</h2></div><div className="problem-copy"><p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p><p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p><Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link></div></div></section>
 
-        <section id="approach" className="new-section approach-section"><div className="shell"><div className="section-intro"><p className="eyebrow">A considered approach</p><h2>Only what your business actually needs.</h2><p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p></div><div className="approach-steps" aria-label="How a project moves from question to delivery">{[["Discussion", "Align on the goal", Search], ["Discovery", "Understand the context", ClipboardCheck], ["Planning", "Shape the right scope", SlidersHorizontal], ["Execute", "Build with momentum", Rocket], ["Review", "Refine what matters", ClipboardCheck], ["Delivery", "Launch with confidence", Truck], ["Support", "Keep improving", Headphones]].map(([step, detail, Icon], index) => { const StepIcon = Icon; return <article key={step} className="approach-step"><div className="approach-step-top"><span className="approach-index">{String(index + 1).padStart(2, "0")}</span><span className="approach-icon"><StepIcon size={18} /></span></div><span className="approach-stage">Stage {String(index + 1).padStart(2, "0")}</span><h3>{step}</h3><p>{detail}</p></article>; })}</div></div></section>
+        <section id="approach" className="new-section approach-section"><div className="shell"><div className="section-intro"><p className="eyebrow">A considered approach</p><h2>Only what your business actually needs.</h2><p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p></div><div className="approach-steps" aria-label="How a project moves from question to delivery">{[["Discussion", "Align on the goal", Search], ["Discovery", "Understand the context", ClipboardCheck], ["Planning", "Shape the right scope", SlidersHorizontal], ["Execute", "Build with momentum", Rocket], ["Review", "Refine what matters", ClipboardCheck], ["Delivery", "Launch with confidence", Truck], ["Support", "Keep improving", Headphones]].map(([step, detail, Icon], index) => { const StepIcon = Icon; return <article key={step} className="approach-step"><div className="approach-step-top"><span className="approach-index">{String(index + 1).padStart(2, "0")}</span><span className="approach-icon"><StepIcon size={18} strokeWidth={1.8} /></span></div><div className="approach-step-heading"><h3>{step}</h3><span className="approach-arrow" aria-hidden="true"><ArrowUpRight size={15} /></span></div><p>{detail}</p></article>; })}</div></div></section>
 
         <section id="services" className="new-section services-section"><div className="shell"><div className="section-intro compact"><p className="eyebrow">Capabilities</p><h2>One partner across the digital work.</h2><p>Explore the areas we can bring together when the requirements call for it.</p></div><ServiceExplorer /></div></section>
 
