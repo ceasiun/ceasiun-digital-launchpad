@@ -1667,34 +1667,6 @@ blockquote em {
 @media (max-width: 420px) { .shell { width: min(100% - 1.5rem, 1180px); } .hero-lede { font-size: 1rem; } .hero-note { align-items: flex-start; line-height: 1.5; } .faq-tabs { gap: .35rem; } .faq-tabs button { flex: 1; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .hero-tech-field *, .new-hero-inner, .process-line::before { animation: none !important; } }
 
-/* Unified digital performance snapshot */
-.trust-strip { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: linear-gradient(110deg, color-mix(in oklab, var(--card) 72%, transparent), transparent 70%); }
-.trust-strip::before { position: absolute; inset: 0; content: ""; opacity: .4; background-image: linear-gradient(90deg, transparent 0 49.8%, color-mix(in oklab, var(--primary) 10%, transparent) 50%, transparent 50.2%), linear-gradient(color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px); background-size: 25% 100%, 100% 2.75rem; mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent); }
-.metrics-system { position: relative; z-index: 1; }
-.metrics-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
-.metrics-status { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted-foreground); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-.metrics-status i { width: .42rem; height: .42rem; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 .25rem color-mix(in oklab, var(--primary) 15%, transparent); animation: metric-blink 2.2s ease-in-out infinite; }
-.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.metric-zone { position: relative; min-width: 0; padding: clamp(1.4rem, 3vw, 2.5rem) clamp(1rem, 2.2vw, 2rem); border-right: 1px solid var(--border); opacity: 0; transform: translateY(10px); animation: metric-arrive .65s var(--metric-delay) cubic-bezier(.22,1,.36,1) forwards; }
-.metric-zone:first-child { border-left: 1px solid var(--border); }
-.metric-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: 2.2rem; }
-.metric-icon { display: grid; width: 2.3rem; height: 2.3rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 48%, var(--border)); color: var(--primary); background: color-mix(in oklab, var(--primary) 8%, transparent); }
-.metric-index { color: var(--muted-foreground); font-size: .62rem; letter-spacing: .1em; }
-.metric-signal { display: inline-flex; align-items: center; gap: .18rem; margin-left: auto; }
-.metric-signal i { display: block; width: .18rem; height: .5rem; background: var(--primary); opacity: .38; animation: metric-signal 1.3s ease-in-out infinite; }
-.metric-signal i:nth-child(2) { height: .85rem; animation-delay: .15s; } .metric-signal i:nth-child(3) { height: .65rem; animation-delay: .3s; }
-.metric-zone strong { display: block; font: 700 clamp(2.6rem, 5.5vw, 4.8rem)/.9 var(--font-display); letter-spacing: -.07em; }
-.metric-zone strong span { display: inline-block; min-width: 1.1ch; }
-.metric-label { display: block; margin-top: .8rem; color: var(--foreground); font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.metric-note { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1.5rem; color: var(--muted-foreground); font-size: .72rem; }
-.metric-note svg { color: var(--primary); }
-@keyframes metric-arrive { to { opacity: 1; transform: translateY(0); } }
-@keyframes metric-signal { 50% { opacity: 1; transform: scaleY(1.35); } }
-@keyframes metric-blink { 50% { opacity: .45; } }
-@media (max-width: 760px) { .metrics-heading { align-items: flex-start; flex-direction: column; gap: .7rem; } .trust-grid { grid-template-columns: repeat(2, 1fr); } .metric-zone:nth-child(3) { border-left: 1px solid var(--border); border-top: 1px solid var(--border); } .metric-zone:nth-child(4) { border-top: 1px solid var(--border); } }
-@media (max-width: 420px) { .metric-zone { padding: 1.25rem .85rem; } .metric-head { margin-bottom: 1.7rem; } .metric-zone strong { font-size: 2.6rem; } .metric-label { font-size: .68rem; letter-spacing: .05em; } .metric-note { font-size: .65rem; } .metric-index { display: none; } }
-@media (prefers-reduced-motion: reduce) { .metric-zone, .metric-signal i, .metrics-status i { animation: none !important; } .metric-zone { opacity: 1; transform: none; } }
-
   /* Considered approach: a single, premium workflow system */
   .approach-section { position: relative; overflow: hidden; }
   .approach-section::before { position: absolute; top: 5rem; right: -12rem; width: 28rem; height: 28rem; content: ""; border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); border-radius: 50%; opacity: .7; pointer-events: none; }
