@@ -2009,6 +2009,26 @@ blockquote em {
   border-radius: 0.5rem;
   object-fit: cover;
 }
+/* Digital core hero visual */
+.hero-tech-field { opacity: 1; isolation: isolate; background: radial-gradient(circle at 72% 50%, color-mix(in oklab, var(--primary) 8%, transparent), transparent 32rem); }
+.hero-tech-field::before, .hero-tech-field::after { content: ""; position: absolute; width: clamp(16rem, 42vw, 42rem); aspect-ratio: 1; right: clamp(-10rem, 3vw, 3rem); top: 50%; border: 1px solid color-mix(in oklab, var(--primary) 16%, transparent); border-radius: 50%; transform: translateY(-50%) rotate(18deg) scaleY(.42); box-shadow: 0 0 80px color-mix(in oklab, var(--primary) 8%, transparent); animation: core-breathe 8s ease-in-out infinite; }
+.hero-tech-field::after { width: clamp(12rem, 30vw, 30rem); right: clamp(0rem, 12vw, 12rem); transform: translateY(-50%) rotate(-32deg) scaleY(.5); animation-delay: -3s; }
+.tech-grid { opacity: .35; mask-image: radial-gradient(ellipse at 72% 50%, black 0%, transparent 65%); }
+.digital-core { position: absolute; z-index: 5; right: clamp(12rem, 27vw, 27rem); top: 50%; width: clamp(5.5rem, 10vw, 8rem); aspect-ratio: 1; display: grid; place-items: center; transform: translate(50%, -50%); border: 1px solid color-mix(in oklab, var(--primary) 68%, white 5%); border-radius: 50%; background: color-mix(in oklab, var(--background) 88%, var(--primary)); box-shadow: 0 0 0 1rem color-mix(in oklab, var(--primary) 5%, transparent), 0 0 5rem color-mix(in oklab, var(--primary) 20%, transparent); animation: core-float 6s ease-in-out infinite; }
+.digital-core strong { font: 700 clamp(2rem, 4vw, 3rem)/1 var(--font-display); color: var(--primary); letter-spacing: -.12em; }
+.digital-core small { position: absolute; bottom: 1.05rem; font-size: .42rem; letter-spacing: .24em; color: var(--muted-foreground); }
+.core-pulse { position: absolute; inset: .65rem; border: 1px dashed color-mix(in oklab, var(--primary) 38%, transparent); border-radius: inherit; animation: core-spin 12s linear infinite; }
+.digital-orbit { position: absolute; z-index: 3; right: clamp(2rem, 7vw, 7rem); top: 50%; width: clamp(18rem, 48vw, 48rem); aspect-ratio: 1; border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent); border-radius: 50%; transform: translateY(-50%) rotate(18deg) scaleY(.42); animation: orbit-spin 28s linear infinite; }
+.digital-orbit.orbit-two { width: clamp(14rem, 37vw, 37rem); right: clamp(5rem, 13vw, 13rem); transform: translateY(-50%) rotate(-32deg) scaleY(.5); animation-duration: 22s; animation-direction: reverse; }
+.digital-orbit.orbit-three { width: clamp(10rem, 27vw, 27rem); right: clamp(9rem, 19vw, 19rem); transform: translateY(-50%) rotate(58deg) scaleY(.5); animation-duration: 17s; }
+.orbit-service { position: absolute; display: grid; place-items: center; width: clamp(2.4rem, 4.6vw, 3.6rem); aspect-ratio: 1; padding: .25rem; border: 1px solid color-mix(in oklab, var(--primary) 52%, transparent); border-radius: 50%; background: var(--background); color: var(--primary); font-size: clamp(.42rem, .7vw, .56rem); font-weight: 700; letter-spacing: .08em; transform: translate(-50%, -50%) rotate(-18deg) scaleY(2.38); }
+.orbit-two .orbit-service { transform: translate(-50%, -50%) rotate(32deg) scaleY(2); } .orbit-three .orbit-service { transform: translate(-50%, -50%) rotate(-58deg) scaleY(2); }
+.service-web { left: 13%; top: 26%; } .service-ai { left: 88%; top: 72%; } .service-security { left: 83%; top: 19%; } .service-brand { left: 17%; top: 82%; } .service-growth { left: 22%; top: 12%; } .service-ops { left: 80%; top: 88%; }
+.orbit-node { position: absolute; z-index: 2; width: .35rem; aspect-ratio: 1; border-radius: 50%; background: var(--primary); box-shadow: 0 0 1rem var(--primary); animation: node-pulse 3s ease-in-out infinite; } .node-one { right: 17%; top: 27%; } .node-two { right: 27%; bottom: 17%; animation-delay: -1s; } .node-three { right: 7%; top: 63%; animation-delay: -2s; }
+@keyframes orbit-spin { to { rotate: 360deg; } } @keyframes core-spin { to { rotate: 360deg; } } @keyframes core-float { 50% { translate: 0 -8px; } } @keyframes core-breathe { 50% { opacity: .62; scale: 1.03; } } @keyframes node-pulse { 50% { scale: 2; opacity: .5; } }
+@media (max-width: 700px) { .new-hero { min-height: 760px; padding-top: 12rem; align-items: flex-start; } .hero-tech-field { opacity: .62; } .hero-tech-field::before, .hero-tech-field::after { top: 22%; right: -34%; width: 25rem; } .hero-tech-field::after { right: -10%; width: 18rem; } .digital-core { width: 5.2rem; right: 9%; top: 20%; } .digital-orbit { width: 25rem; right: -36%; top: 21%; } .digital-orbit.orbit-two { width: 19rem; right: -17%; top: 21%; } .digital-orbit.orbit-three { width: 14rem; right: 2%; top: 21%; } .orbit-service { font-size: .4rem; } .new-hero-inner { padding-top: 0; } .hero-note { margin-top: 3rem; } }
+@media (prefers-reduced-motion: reduce) { .digital-core, .core-pulse, .digital-orbit, .hero-tech-field::before, .hero-tech-field::after, .orbit-node, .tech-grid { animation: none; } }
+
 .admin {
   min-height: 100vh;
   min-height: 100dvh;
@@ -3411,7 +3431,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ════════���═══════���═══��═════════════════��══���═════════════════════���═══
+/* ════════���═══════�����══��═════════════════��══���═════════════════════���═══
    ADMIN STATUS PILLS
 ══════════════════════════════���════════════��═══════════════════════ */
 .status-pill {

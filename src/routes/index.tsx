@@ -67,7 +67,14 @@ export default function HomePage() {
     <a className="skip-link" href="#main">Skip to content</a>
     <div id="top" className="new-home">
       <section className="new-hero" aria-labelledby="hero-title">
-        <div className="hero-tech-field" aria-hidden="true"><span className="tech-orbit orbit-one" /><span className="tech-orbit orbit-two" /><span className="tech-orbit orbit-three" /><span className="tech-grid" /><span className="tech-cross cross-one" /><span className="tech-cross cross-two" /></div>
+        <div className="hero-tech-field" aria-hidden="true">
+          <div className="digital-core"><span className="core-pulse" /><strong>C</strong><small>CEASIUN</small></div>
+          <div className="digital-orbit orbit-one"><span className="orbit-service service-web">WEB</span><span className="orbit-service service-ai">AI</span></div>
+          <div className="digital-orbit orbit-two"><span className="orbit-service service-security">SEC</span><span className="orbit-service service-brand">BRAND</span></div>
+          <div className="digital-orbit orbit-three"><span className="orbit-service service-growth">GROWTH</span><span className="orbit-service service-ops">OPS</span></div>
+          <span className="orbit-node node-one" /><span className="orbit-node node-two" /><span className="orbit-node node-three" />
+          <span className="tech-grid" />
+        </div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
           <h1 id="hero-title">Take your business online.<br /><em>Build it to grow.</em></h1>
