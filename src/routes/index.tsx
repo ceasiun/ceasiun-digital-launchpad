@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
+import { Activity, ArrowUpRight, BarChart3, Check, ChevronDown, Clock3, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones, Star, Users } from "lucide-react";
 import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const serviceAreas = [
   { title: "Website Development", detail: "Websites and commerce experiences built around how your business needs to work.", tags: ["Websites", "E-commerce", "Web apps"] },
@@ -44,6 +44,62 @@ const faqGroups = [
   { label: "Services", items: [["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."]] },
   { label: "Payments", items: [faqs[3]] },
 ];
+
+const metrics = [
+  { value: 200, suffix: "+", label: "Campaigns launched", note: "Momentum in motion", Icon: BarChart3 },
+  { value: 50, suffix: "+", label: "Happy clients", note: "Partnerships that last", Icon: Users },
+  { value: 5, suffix: "+", label: "Years experience", note: "Built through practice", Icon: Clock3 },
+  { value: 4.9, suffix: "", label: "Client rating", note: "Trust, measured", Icon: Star },
+];
+
+function AnimatedMetric({ value, suffix, label, note, Icon, index }: (typeof metrics)[number] & { index: number }) {
+  const [display, setDisplay] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const element = document.querySelector("#trust");
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.35 });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const duration = 1250;
+    const start = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Number((value * eased).toFixed(value % 1 ? 1 : 0)));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [started, value]);
+
+  return <article className="metric-zone" style={{ "--metric-delay": `${index * 90}ms` } as React.CSSProperties}>
+    <div className="metric-head"><span className="metric-icon"><Icon size={18} strokeWidth={1.7} /></span><span className="metric-signal"><i /><i /><i /></span><span className="metric-index">0{index + 1} / 04</span></div>
+    <strong><span>{started ? display : 0}</span>{suffix}</strong>
+    <span className="metric-label">{label}</span>
+    <span className="metric-note"><Activity size={12} /> {note}</span>
+  </article>;
+}
+
+function MetricsStrip() {
+  return <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers">
+    <div className="shell metrics-system">
+      <div className="metrics-heading"><span className="eyebrow">Live performance snapshot</span><span className="metrics-status"><i /> Systems online</span></div>
+      <div className="trust-grid">{metrics.map((metric, index) => <AnimatedMetric key={metric.label} {...metric} index={index} />)}</div>
+    </div>
+  </section>;
+}
 
 function Faq() {
   const [activeGroup, setActiveGroup] = useState(0);
@@ -87,7 +143,7 @@ export default function HomePage() {
         <div className="hero-index" aria-hidden="true">01 <span /> 07</div>
       </section>
 
-      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></section>
+      <MetricsStrip />
 
       <main id="main">
         <section id="problem" className="new-section problem-section"><div className="shell problem-grid"><div><p className="eyebrow">The gap</p><h2>Digital should make business clearer, not more complicated.</h2></div><div className="problem-copy"><p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p><p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p><Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link></div></div></section>
