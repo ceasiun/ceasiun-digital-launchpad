@@ -2274,9 +2274,30 @@ blockquote em {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-/* ==========================================================================
-   Service Category Detail Pages & Responsive Layout Refinements
-   ========================================================================== */
+/* Ceasiun signal field: a responsive, lightweight digital infrastructure layer. */
+.new-hero { background: var(--background); }
+.hero-tech-field { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; opacity: 1; } .new-hero-inner { position: relative; z-index: 2; } .hero-tech-field > * { z-index: 1; }
+.hero-tech-field::before { position: absolute; inset: 0; content: ""; background: radial-gradient(ellipse at 78% 48%, color-mix(in oklab, var(--primary) 10%, transparent), transparent 38%), linear-gradient(112deg, transparent 30%, color-mix(in oklab, var(--primary) 4%, transparent) 66%, transparent 100%); }
+.hero-tech-field::after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 92%, transparent) 42%, transparent 78%); }
+.signal-plane { position: absolute; width: 58vw; height: 34vw; max-width: 900px; max-height: 540px; right: -7vw; top: 20%; border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent); transform: skewY(-18deg) rotate(-8deg); opacity: .6; }
+.signal-plane::before, .signal-plane::after { position: absolute; content: ""; inset: 10%; border: 1px solid color-mix(in oklab, var(--primary) 14%, transparent); }
+.signal-plane::after { inset: 22%; border-color: color-mix(in oklab, var(--primary) 24%, transparent); }
+.signal-plane-back { animation: plane-drift 18s ease-in-out infinite alternate; opacity: .28; }
+.signal-plane-mid { right: 6vw; top: 29%; transform: skewY(-18deg) rotate(-8deg) scale(.72); animation: plane-drift 14s ease-in-out -5s infinite alternate-reverse; opacity: .34; }
+.signal-plane-front { right: 15vw; top: 37%; transform: skewY(-18deg) rotate(-8deg) scale(.43); animation: plane-drift 11s ease-in-out -2s infinite alternate; opacity: .42; }
+.signal-route { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 55%, transparent), transparent); transform-origin: left; animation: route-breathe 7s ease-in-out infinite; }
+.signal-route i { position: absolute; top: 50%; width: 5px; height: 5px; border: 1px solid var(--primary); border-radius: 50%; background: var(--background); transform: translateY(-50%); animation: signal-travel 5s linear infinite; }
+.signal-route i:nth-child(2) { animation-delay: -1.7s; } .signal-route i:nth-child(3) { animation-delay: -3.2s; }
+.route-one { width: 38%; right: 8%; top: 31%; transform: rotate(18deg); } .route-two { width: 30%; right: 18%; top: 55%; transform: rotate(-22deg); animation-delay: -2s; } .route-three { width: 24%; right: 28%; top: 70%; transform: rotate(12deg); animation-delay: -4s; }
+.data-node { position: absolute; width: 9px; height: 9px; border: 1px solid var(--primary); background: var(--background); box-shadow: 0 0 0 6px color-mix(in oklab, var(--primary) 8%, transparent); transform: rotate(45deg); animation: node-pulse 4s ease-in-out infinite; }
+.data-node-one { right: 16%; top: 28%; } .data-node-two { right: 38%; top: 57%; animation-delay: -1.4s; } .data-node-three { right: 11%; top: 73%; animation-delay: -2.6s; }
+.system-readout { position: absolute; right: 9%; bottom: 15%; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .45rem .65rem; color: color-mix(in oklab, var(--primary) 68%, var(--muted-foreground)); font: 700 .58rem var(--font-display); letter-spacing: .14em; }
+.system-readout b { width: 3rem; height: 1px; background: var(--primary); opacity: .6; } .system-readout small { grid-column: 1 / -1; color: var(--muted-foreground); font-size: .52rem; }
+@keyframes plane-drift { to { translate: -2.5% 2%; rotate: 1deg; } } @keyframes route-breathe { 50% { opacity: .35; scale: .96 1; } } @keyframes signal-travel { 0%, 100% { translate: -18px 0; opacity: 0; } 18%, 78% { opacity: .9; } 88% { translate: 18px 0; opacity: 0; } } @keyframes node-pulse { 50% { scale: 1.35; opacity: .45; } }
+@media (max-width: 760px) { .hero-tech-field { opacity: .72; } .signal-plane { width: 105vw; height: 66vw; right: -38vw; top: 30%; } .signal-plane-mid { right: -22vw; top: 40%; } .signal-plane-front { right: -5vw; top: 48%; } .route-one { width: 55%; right: -2%; top: 39%; } .route-two { width: 46%; right: 8%; top: 60%; } .route-three { width: 34%; right: 20%; top: 74%; } .data-node-one { right: 12%; top: 35%; } .data-node-two { right: 48%; top: 59%; } .data-node-three { right: 8%; top: 77%; } .system-readout { right: 7%; bottom: 8%; } }
+@media (prefers-reduced-motion: reduce) { .signal-plane, .signal-route, .signal-route i, .data-node { animation: none !important; } }
+
+/* ==========================================================================\n   Service Category Detail Pages & Responsive Layout Refinements\n   ========================================================================== */
 
 .service-detail-hero {
   position: relative;

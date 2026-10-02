@@ -68,12 +68,14 @@ export default function HomePage() {
     <div id="top" className="new-home">
       <section className="new-hero" aria-labelledby="hero-title">
         <div className="hero-tech-field" aria-hidden="true">
-          <div className="digital-core"><span className="core-pulse" /><strong>C</strong><small>CEASIUN</small></div>
-          <div className="digital-orbit orbit-one"><span className="orbit-service service-web">WEB</span><span className="orbit-service service-ai">AI</span></div>
-          <div className="digital-orbit orbit-two"><span className="orbit-service service-security">SEC</span><span className="orbit-service service-brand">BRAND</span></div>
-          <div className="digital-orbit orbit-three"><span className="orbit-service service-growth">GROWTH</span><span className="orbit-service service-ops">OPS</span></div>
-          <span className="orbit-node node-one" /><span className="orbit-node node-two" /><span className="orbit-node node-three" />
-          <span className="tech-grid" />
+          <div className="signal-plane signal-plane-back" />
+          <div className="signal-plane signal-plane-mid" />
+          <div className="signal-plane signal-plane-front" />
+          <div className="signal-route route-one"><i /><i /><i /></div>
+          <div className="signal-route route-two"><i /><i /><i /></div>
+          <div className="signal-route route-three"><i /><i /></div>
+          <span className="data-node data-node-one" /><span className="data-node data-node-two" /><span className="data-node data-node-three" />
+          <div className="system-readout"><span>LIVE SYSTEM</span><b /><small>CONNECTED / 07</small></div>
         </div>
         <div className="shell new-hero-inner">
           <p className="eyebrow">Digital growth partner / Pakistan + worldwide</p>
