@@ -1714,6 +1714,74 @@ blockquote em {
   padding: 5rem 0 1.5rem;
   border-top: 1px solid var(--border);
 }
+
+/* Homepage layout contract: keep cards readable at every viewport. */
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  min-width: 0;
+}
+.service-card-static {
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(1.15rem, 2vw, 1.6rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, color-mix(in oklab, var(--card) 95%, var(--primary)), var(--card));
+  color: var(--foreground);
+  text-decoration: none;
+  transition: transform 260ms cubic-bezier(.22,1,.36,1), border-color 220ms ease, box-shadow 260ms ease;
+}
+.service-card-static:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+  box-shadow: 0 18px 34px color-mix(in oklab, var(--primary) 10%, transparent);
+}
+.service-card-heading { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.service-card-heading h3 { min-width: 0; margin: 0; font: 600 clamp(1.05rem, 1.7vw, 1.3rem)/1.15 var(--font-display); }
+.service-card-icon { display: grid; width: 2.35rem; height: 2.35rem; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 42%, var(--border)); border-radius: .7rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 8%, transparent); }
+.service-card-static > p { margin: 1.15rem 0; color: var(--muted-foreground); font-size: .9rem; line-height: 1.6; }
+.service-card-static ul { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.service-card-static li { display: flex; align-items: flex-start; gap: .45rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.4; }
+.service-card-static li svg { flex: 0 0 auto; margin-top: .1rem; color: var(--primary); }
+.service-card-static .card-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; padding-top: 1.25rem; color: var(--primary); font-size: .8rem; font-weight: 700; }
+.service-card-static .card-link svg { transition: transform 220ms ease; }
+.service-card-static:hover .card-link svg { transform: translate(3px, -3px); }
+
+@media (max-width: 1080px) {
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .shell { width: min(calc(100% - 2rem), 1180px); }
+  .new-hero { min-height: min(760px, 100svh); padding: 7rem 0 4rem; }
+  .new-hero h1 { max-width: 12ch; font-size: clamp(3rem, 12vw, 5.5rem); }
+  .hero-lede { max-width: 38rem; }
+  .hero-note { max-width: 28rem; margin-top: 3rem; }
+  .problem-grid, .why-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .new-section { padding: clamp(4rem, 12vw, 7rem) 0; }
+}
+@media (max-width: 540px) {
+  .shell { width: min(calc(100% - 1.5rem), 1180px); }
+  .new-hero { min-height: 100svh; padding-top: 6rem; }
+  .new-hero h1 { font-size: clamp(2.75rem, 14vw, 4.5rem); letter-spacing: -.07em; }
+  .hero-actions { align-items: stretch; flex-direction: column; gap: .75rem; }
+  .hero-actions .button, .hero-actions .text-link { width: fit-content; }
+  .hero-note { margin-top: 2.25rem; }
+  .trust-grid strong { font-size: clamp(1.75rem, 9vw, 2.5rem); }
+  .service-cards { grid-template-columns: 1fr; }
+  .service-card-static { min-height: 0; }
+  .new-section h2 { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+  .work-placeholder { display: grid; gap: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card-static { transition: none; }
+  .service-card-static:hover { transform: none; }
+}
 .footer-grid {
   display: grid;
   gap: 3rem;
@@ -3626,7 +3694,7 @@ blockquote em {
 
 /* ══════════��═══��═════════════════════════════��═══════════��══════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
-════════════════════════════���════════════════════════���═════════════ */
+════════════════════════════���══════════════���═════════���═════════════ */
 .cms-editor {
   background: var(--card);
   border: 1px solid var(--border);
