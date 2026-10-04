@@ -1862,17 +1862,22 @@ blockquote em {
 .hero-grid-mark { display: none !important; }
 .hero-note { position: relative; z-index: 2; }
 .service-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.service-card-static { display: flex; min-height: 290px; flex-direction: column; padding: clamp(1.25rem, 2.2vw, 2rem); border: 1px solid var(--border); border-radius: 1rem; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 92%, var(--primary)), color-mix(in oklab, var(--background) 94%, transparent)); color: var(--foreground); text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in oklab, white 8%, transparent); transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
-.service-card-static:hover { transform: translateY(-8px); border-color: color-mix(in oklab, var(--primary) 58%, var(--border)); box-shadow: 0 20px 45px color-mix(in oklab, var(--primary) 12%, transparent); }
-.service-card-top { display: flex; align-items: center; justify-content: space-between; color: var(--primary); }
-.service-card-top svg { transition: transform .3s ease; }
-.service-card-static:hover .service-card-top svg { transform: translate(4px, -4px); }
-.service-card-static h3 { margin: 2.25rem 0 .8rem; font: 700 clamp(1.25rem, 2vw, 1.7rem)/1.05 var(--font-display); letter-spacing: -.04em; }
-.service-card-static p { margin: 0; color: var(--muted-foreground); line-height: 1.65; }
-.service-card-static ul { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.25rem 0 1.5rem; padding: 0; list-style: none; }
-.service-card-static li { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .55rem; border: 1px solid var(--border); border-radius: 999px; color: var(--muted-foreground); font-size: .72rem; }
-.service-card-static li svg { color: var(--primary); }
+.service-card-static { display: flex; min-height: 390px; flex-direction: column; padding: clamp(1.35rem, 2.4vw, 2rem); border: 1px solid var(--border); border-radius: 1rem; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 94%, var(--primary)), color-mix(in oklab, var(--background) 96%, transparent)); color: var(--foreground); text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in oklab, white 8%, transparent); transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
+.service-card-static:hover { transform: translateY(-7px); border-color: color-mix(in oklab, var(--primary) 58%, var(--border)); box-shadow: 0 22px 45px color-mix(in oklab, var(--primary) 12%, transparent); }
+.service-card-heading { display: flex; align-items: flex-start; gap: .85rem; min-height: 3.1rem; }
+.service-card-icon { display: grid; flex: 0 0 2.65rem; size: 2.65rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: .75rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, transparent); transition: transform .3s ease, background-color .3s ease; }
+.service-card-static:hover .service-card-icon { transform: translateY(-2px) rotate(-4deg); background: color-mix(in oklab, var(--primary) 16%, transparent); }
+.service-card-static h3 { margin: .15rem 0 0; font: 700 clamp(1.2rem, 1.8vw, 1.55rem)/1.08 var(--font-display); letter-spacing: -.04em; }
+.service-card-static p { max-width: 36ch; margin: 1.35rem 0 1.25rem; color: var(--muted-foreground); line-height: 1.6; }
+.service-card-static ul { display: grid; gap: .65rem; margin: 0 0 1.5rem; padding: 1rem 0; border-block: 1px solid color-mix(in oklab, var(--border) 75%, transparent); list-style: none; }
+.service-card-static li { display: flex; align-items: flex-start; gap: .55rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.35; }
+.service-card-static li svg { flex: 0 0 auto; margin-top: .1rem; color: var(--primary); }
 .card-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; color: var(--primary); font-size: .8rem; font-weight: 700; }
+.card-link svg { transition: transform .25s ease; }
+.service-card-static:hover .card-link svg { transform: translate(3px, -3px); }
+@media (max-width: 1100px) { .service-card-static { min-height: 410px; } }
+@media (max-width: 760px) { .service-card-static { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .service-card-static:hover, .service-card-static:hover .service-card-icon, .service-card-static:hover .card-link svg { transform: none; } }
 .process-line { gap: .8rem; }
 .process-step { min-height: 230px !important; padding: 1rem !important; gap: .75rem !important; border-radius: 1rem !important; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 94%, var(--primary)), var(--background)) !important; }
 .process-icon { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 48%, var(--border)); border-radius: .75rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, transparent); }

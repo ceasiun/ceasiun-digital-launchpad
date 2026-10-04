@@ -7,15 +7,13 @@ import { services } from "@/lib/site-data";
 import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
 
-const serviceAreas = [
-  { title: "Website Development", detail: "Websites and commerce experiences built around how your business needs to work.", tags: ["Websites", "E-commerce", "Web apps"] },
-  { title: "Custom Software", detail: "Internal tools and software that remove friction from the way your team operates.", tags: ["Portals", "Dashboards", "SaaS"] },
-  { title: "Branding", detail: "A clear identity system that makes every customer touchpoint feel connected.", tags: ["Identity", "Strategy", "Design systems"] },
-  { title: "Social & Digital Marketing", detail: "Search, content and campaigns connected to real business goals.", tags: ["SEO", "Content", "Paid growth"] },
-  { title: "AI Automation", detail: "Practical workflows and AI systems that reduce repetitive work and improve response time.", tags: ["Workflows", "Agents", "Integrations"] },
-  { title: "Cybersecurity", detail: "Security reviews and defensive improvements for your website, systems and data.", tags: ["Audits", "Hardening", "Monitoring"] },
-  { title: "Managed Services", detail: "Reliable technical capability for teams that need ongoing support without another full-time hire.", tags: ["DevOps", "QA", "Support"] },
-];
+const serviceAreas = services.slice(0, 7).map((service) => ({
+  slug: service.slug,
+  title: service.title,
+  detail: service.description,
+  icon: service.icon,
+  capabilities: service.items,
+}));
 
 const faqs = [
   ["What kind of businesses do you work with?", "Ceasiun supports traditional, growing and international businesses that need a dependable digital partner—from their first launch to ongoing technical operations."],
@@ -49,15 +47,22 @@ function CountUpMetric({ value, label }: { value: string; label: string }) {
 function ServiceExplorer() {
   return (
     <div className="service-cards" aria-label="Service areas">
-      {serviceAreas.map((service, index) => (
-        <Link className="service-detail service-card-static" href={services[index]?.slug ? `/services/${services[index].slug}` : "/services"} key={service.title}>
-          <div className="service-card-top"><span className="eyebrow">{String(index + 1).padStart(2, "0")} / 07</span><ArrowUpRight aria-hidden="true" /></div>
-          <h3>{service.title}</h3>
-          <p>{service.detail}</p>
-          <ul>{service.tags.map((tag) => <li key={tag}><Check size={15} />{tag}</li>)}</ul>
-          <span className="card-link">Explore capability <ArrowUpRight size={16} /></span>
-        </Link>
-      ))}
+      {serviceAreas.map((service) => {
+        const ServiceIcon = service.icon;
+        return (
+          <Link className="service-detail service-card-static" href={`/services/${service.slug}`} key={service.title}>
+            <div className="service-card-heading">
+              <span className="service-card-icon"><ServiceIcon size={21} strokeWidth={1.7} aria-hidden="true" /></span>
+              <h3>{service.title}</h3>
+            </div>
+            <p>{service.detail}</p>
+            <ul aria-label={`${service.title} capabilities`}>
+              {service.capabilities.map((capability) => <li key={capability}><Check size={14} strokeWidth={2.2} aria-hidden="true" /><span>{capability}</span></li>)}
+            </ul>
+            <span className="card-link">Explore capability <ArrowUpRight size={16} aria-hidden="true" /></span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
