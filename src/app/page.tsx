@@ -6,6 +6,8 @@ import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
 import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
+
 
 const serviceAreas = services.slice(0, 7).map((service) => ({
   slug: service.slug,
@@ -21,6 +23,17 @@ const faqs = [
   ["How do projects begin?", "Every project starts with a conversation about the objective, current situation and desired outcome. From there, we define scope, milestones and a clear next step."],
   ["How are payments structured?", "Projects require a 30% advance followed by milestone-based payments. Local and international payment methods are available."],
 ];
+
+const processSteps = [
+  ["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search],
+  ["Discovery", "We examine requirements, users, existing systems, technical needs, opportunities and constraints.", ClipboardCheck],
+  ["Planning", "We define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], 
+  ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], 
+  ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], 
+  ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], 
+  ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]]
+  
+const stats = [["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]]
 
 function CountUpMetric({ value, label }: { value: string; label: string }) {
   const numericValue = Number.parseFloat(value);
@@ -115,24 +128,166 @@ export default function HomePage() {
         <div className="hero-index" aria-hidden="true">01 <span /> 07</div>
       </section>
 
-      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers"><div className="shell trust-grid">{[["200+", "Campaigns launched"], ["50+", "Happy clients"], ["5+", "Years experience"], ["4.9", "Client rating"]].map(([value, label]) => <CountUpMetric key={label} value={value} label={label} />)}</div></section>
+      <section id="trust" className="trust-strip" aria-label="Ceasiun in numbers">
+        <div className="shell trust-grid">
+          {stats.map(([value, label]) => <CountUpMetric key={label} value={value} label={label} />)}
+        </div>
+      </section>
 
       <main id="main">
-        <section id="problem" className="new-section problem-section"><div className="shell problem-grid"><div><p className="eyebrow">The gap</p><h2>Digital should make business clearer, not more complicated.</h2></div><div className="problem-copy"><p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p><p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p><Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link></div></div></section>
+        <section id="problem" className="new-section problem-section">
+          <div className="shell problem-grid">
+            <div>
+              <p className="eyebrow">The gap</p>
+              <h2>Digital should make business clearer, not more complicated.</h2>
+            </div>
+            <div className="problem-copy">
+              <p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p>
+              <p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p>
+              <Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link>
+            </div>
+          </div>
+        </section>
 
-        <section id="approach" className="new-section approach-section"><div className="shell"><div className="section-intro"><p className="eyebrow">A considered approach</p><h2>Only what your business actually needs.</h2><p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p></div><div className="approach-steps" aria-label="How a project moves from question to delivery">{[["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search], ["Discovery", "We examine requirements, users, existing systems, technical needs, opportunities and constraints.", ClipboardCheck], ["Planning", "We define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]].map((item, index) => { const [step, detail, Icon] = item as [string, string, ComponentType<{ size?: number; strokeWidth?: number }>]; const StepIcon = Icon; return <article key={step} className="approach-step"><div className="approach-step-top"><span className="approach-index"><span>STEP</span>{String(index + 1).padStart(2, "0")}</span></div><div className="approach-step-heading"><span className="approach-icon"><StepIcon size={18} strokeWidth={1.8} /></span><h3>{step}</h3></div><p>{detail}</p></article>; })}</div></div></section>
+        <section id="approach" className="new-section approach-section">
+          <div className="shell">
+            <div className="section-intro">
+              <p className="eyebrow">A considered approach</p>
+              <h2>Only what your business actually needs.</h2>
+              <p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p>
+            </div>
+            <div className="approach-steps" aria-label="How a project moves from question to delivery">
+              {processSteps.map((item, index) => { 
+                const [step, detail, Icon] = item as [string, string, ComponentType<{ size?: number; strokeWidth?: number }>]; 
+                const StepIcon = Icon;
+                return <article key={step} className="approach-step">
+                          <div className="approach-step-top">
+                            <span className="approach-index">
+                              <span>STEP</span>
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                          </div>
+                          <div className="approach-step-heading">
+                            <span className="approach-icon">
+                              <StepIcon size={18} strokeWidth={1.8} />
+                            </span>
+                            <h3>{step}</h3>
+                          </div>
+                          <p>{detail}</p>
+                        </article>;
+              })}
+            </div>
+          </div>
+        </section>
 
-        <section id="services" className="new-section services-section"><div className="shell"><div className="section-intro compact"><p className="eyebrow">Capabilities</p><h2>One partner across the digital work.</h2><p>Explore the areas we can bring together when the requirements call for it.</p></div><ServiceExplorer /></div></section>
+        <section id="services" className="new-section services-section">
+          <div className="shell">
+            <div className="section-intro compact">
+              <p className="eyebrow">Capabilities</p>
+              <h2>One partner across the digital work.</h2>
+              <p>Explore the areas we can bring together when the requirements call for it.</p>
+            </div>
+            <ServiceExplorer />
+          </div>
+        </section>
 
-        <section id="why" className="new-section why-section"><div className="shell why-grid"><div><p className="eyebrow">Why Ceasiun</p><h2>Technical depth, explained plainly.</h2></div><div className="why-list"><div><span>01</span><h3>Requirements before recommendations</h3><p>We start with the problem to solve, not a package to sell.</p></div><div><span>02</span><h3>Connected thinking</h3><p>Brand, software, marketing and infrastructure can work as one system.</p></div><div><span>03</span><h3>Clarity at every milestone</h3><p>You know what is being delivered, reviewed and decided next.</p></div></div></div></section>
+        <section id="why" className="new-section why-section">
+          <div className="shell why-grid">
+            <div>
+              <p className="eyebrow">Why Ceasiun</p>
+              <h2>Technical depth, explained plainly.</h2>
+            </div>
+            <div className="why-list">
+              <div>
+                <span>01</span>
+                <h3>Requirements before recommendations</h3>
+                <p>We start with the problem to solve, not a package to sell.</p>
+              </div>
+              <div>
+                <span>02</span>
+                <h3>Connected thinking</h3>
+                <p>Brand, software, marketing and infrastructure can work as one system.</p>
+              </div>
+              <div>
+                <span>03</span>
+                <h3>Clarity at every milestone</h3>
+                <p>You know what is being delivered, reviewed and decided next.</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <section id="work" className="new-section work-section"><div className="shell work-placeholder"><div><p className="eyebrow">Selected work</p><h2>Good work should be easy to verify.</h2></div><p>Client stories and project results will appear here as approved case studies are ready to share. We would rather show an honest blank space than make a claim without context.</p></div></section>
+        <section id="work" className="new-section work-section">
+          <div className="shell work-placeholder">
+            <div>
+              <p className="eyebrow">Selected work</p>
+              <h2>Good work should be easy to verify.</h2>
+            </div>
+            <p>Client stories and project results will appear here as approved case studies are ready to share. We would rather show an honest blank space than make a claim without context.</p>
+          </div>
+        </section>
 
-        <section id="testimonials" className="new-section testimonials-section"><div className="shell"><div className="section-intro compact"><p className="eyebrow">Client perspective</p><h2>Built with clarity. Remembered for the difference.</h2><p>The best partnerships make the work feel simpler and the next decision feel more obvious.</p></div><div className="testimonial-grid"><figure className="testimonial-card testimonial-featured"><div className="quote-mark">“</div><blockquote>Ceasiun helped us turn a scattered digital setup into a system our team could actually use. The process was clear from the first conversation.</blockquote><figcaption><strong>Operations director</strong><span>Growing services business</span></figcaption></figure><figure className="testimonial-card"><div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>Thoughtful, responsive and practical. We always knew what was happening and why.</blockquote><figcaption><strong>Founder</strong><span>International business</span></figcaption></figure><div className="google-review-card"><div className="google-review-top"><span className="google-g">G</span><div><strong>Google reviews</strong><span>Trusted by growing teams</span></div></div><div className="google-score"><strong>4.9</strong><span className="review-stars">★★★★★</span><small>Average client rating</small></div><Link className="card-link" href="/start-project">Start a conversation <ArrowUpRight size={16} /></Link></div></div></div></section>
+        <section id="testimonials" className="new-section testimonials-section">
+          <div className="shell">
+            <div className="section-intro compact">
+              <p className="eyebrow">Client perspective</p>
+              <h2>Built with clarity. Remembered for the difference.</h2>
+              <p>The best partnerships make the work feel simpler and the next decision feel more obvious.</p>
+            </div>
+            <div className="testimonial-grid">
+              <figure className="testimonial-card testimonial-featured">
+                <div className="quote-mark">“</div>
+                <blockquote>Ceasiun helped us turn a scattered digital setup into a system our team could actually use. The process was clear from the first conversation.</blockquote>
+                <figcaption>
+                  <strong>Operations director</strong>
+                  <span>Growing services business</span>
+                </figcaption>
+              </figure>
+              <figure className="testimonial-card">
+                <div className="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <blockquote>Thoughtful, responsive and practical. We always knew what was happening and why.</blockquote>
+                <figcaption>
+                  <strong>Founder</strong>
+                  <span>International business</span>
+                </figcaption>
+              </figure>
+              <div className="google-review-card">
+                <div className="google-review-top">
+                  <span className="google-g">G</span>
+                  <div>
+                    <strong>Google reviews</strong>
+                    <span>Trusted by growing teams</span>
+                  </div>
+                </div>
+                <div className="google-score">
+                  <strong>4.9</strong>
+                  <span className="review-stars">★★★★★</span>
+                  <small>Average client rating</small>
+                </div>
+                <Link className="card-link" href="/start-project">Start a conversation <ArrowUpRight size={16} /></Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <section id="faq" className="new-section faq-section"><div className="shell faq-grid"><div className="section-intro compact"><p className="eyebrow">Questions, answered</p><h2>Before we begin.</h2><p>A few practical details about working together.</p></div><Faq /></div></section>
+        <section id="faq" className="new-section faq-section">
+          <div className="shell faq-grid">
+            <div className="section-intro compact">
+              <p className="eyebrow">Questions, answered</p>
+              <h2>Before we begin.</h2>
+              <p>A few practical details about working together.</p>
+            </div>
+            <Faq />
+          </div>
+        </section>
 
-        <section id="start" className="new-cta"><div className="shell"><p className="eyebrow">Ready when you are</p><h2>Bring the situation.<br /><em>We will help shape the next step.</em></h2><Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link></div></section>
+        <section id="start" className="new-cta">
+          <div className="shell">
+            <p className="eyebrow">Ready when you are</p>
+            <h2>Bring the situation.<br /><em>We will help shape the next step.</em></h2>
+            <Link className="button button-primary" href="/start-project">Start a project <ArrowUpRight size={18} /></Link>
+          </div>
+        </section>
       </main>
     </div>
   </Layout>;

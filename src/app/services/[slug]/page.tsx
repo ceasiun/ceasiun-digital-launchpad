@@ -10,8 +10,8 @@ import { Layout, CTA, meta } from "@/components/site";
 import { samples } from "@/lib/site-data";
 import { Button } from "@/components/ui/button";
 import { useCmsServices } from "@/hooks/use-cms";
-import ShapeGrid from "@/components/ShapeGrid";
-import LogoLoop from "@/components/LogoLoop"
+import ShapeGrid from "@/components/External/ShapeGrid";
+import LogoLoop from "@/components/External/LogoLoop"
 import { useParams } from "next/navigation";
 
 import {SiReact, SiNextdotjs, SiWordpress, SiShopify, SiTanstack, SiPhp, SiTypescript, SiRedux, SiTailwindcss, SiGithub, SiExpress, SiPostgresql, SiMongodb, SiNodedotjs, SiDjango, SiFastapi, SiInstagram, SiFacebook, SiX, SiYoutube, SiWhatsapp, SiDiscord, SiGmail, SiTelegram, SiReddit,SiFigma,} from 'react-icons/si';
