@@ -5,16 +5,15 @@ import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizonta
 import { Layout } from "@/components/site";
 import { services } from "@/lib/site-data";
 import { useEffect, useState } from "react";
+import type { ComponentType } from "react";
 
-const serviceAreas = [
-  { title: "Website Development", detail: "Websites and commerce experiences built around how your business needs to work.", tags: ["Websites", "E-commerce", "Web apps"] },
-  { title: "Custom Software", detail: "Internal tools and software that remove friction from the way your team operates.", tags: ["Portals", "Dashboards", "SaaS"] },
-  { title: "Branding", detail: "A clear identity system that makes every customer touchpoint feel connected.", tags: ["Identity", "Strategy", "Design systems"] },
-  { title: "Social & Digital Marketing", detail: "Search, content and campaigns connected to real business goals.", tags: ["SEO", "Content", "Paid growth"] },
-  { title: "AI Automation", detail: "Practical workflows and AI systems that reduce repetitive work and improve response time.", tags: ["Workflows", "Agents", "Integrations"] },
-  { title: "Cybersecurity", detail: "Security reviews and defensive improvements for your website, systems and data.", tags: ["Audits", "Hardening", "Monitoring"] },
-  { title: "Managed Services", detail: "Reliable technical capability for teams that need ongoing support without another full-time hire.", tags: ["DevOps", "QA", "Support"] },
-];
+const serviceAreas = services.slice(0, 7).map((service) => ({
+  slug: service.slug,
+  title: service.title,
+  detail: service.description,
+  icon: service.icon,
+  capabilities: service.items,
+}));
 
 const faqs = [
   ["What kind of businesses do you work with?", "Ceasiun supports traditional, growing and international businesses that need a dependable digital partner—from their first launch to ongoing technical operations."],
@@ -48,15 +47,22 @@ function CountUpMetric({ value, label }: { value: string; label: string }) {
 function ServiceExplorer() {
   return (
     <div className="service-cards" aria-label="Service areas">
-      {serviceAreas.map((service, index) => (
-        <Link className="service-detail service-card-static" href={services[index]?.slug ? `/services/${services[index].slug}` : "/services"} key={service.title}>
-          <div className="service-card-top"><span className="eyebrow">{String(index + 1).padStart(2, "0")} / 07</span><ArrowUpRight aria-hidden="true" /></div>
-          <h3>{service.title}</h3>
-          <p>{service.detail}</p>
-          <ul>{service.tags.map((tag) => <li key={tag}><Check size={15} />{tag}</li>)}</ul>
-          <span className="card-link">Explore capability <ArrowUpRight size={16} /></span>
-        </Link>
-      ))}
+      {serviceAreas.map((service) => {
+        const ServiceIcon = service.icon;
+        return (
+          <Link className="service-detail service-card-static" href={`/services/${service.slug}`} key={service.title}>
+            <div className="service-card-heading">
+              <span className="service-card-icon"><ServiceIcon size={21} strokeWidth={1.7} aria-hidden="true" /></span>
+              <h3>{service.title}</h3>
+            </div>
+            <p>{service.detail}</p>
+            <ul aria-label={`${service.title} capabilities`}>
+              {service.capabilities.map((capability) => <li key={capability}><Check size={14} strokeWidth={2.2} aria-hidden="true" /><span>{capability}</span></li>)}
+            </ul>
+            <span className="card-link">Explore capability <ArrowUpRight size={16} aria-hidden="true" /></span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
@@ -114,7 +120,7 @@ export default function HomePage() {
       <main id="main">
         <section id="problem" className="new-section problem-section"><div className="shell problem-grid"><div><p className="eyebrow">The gap</p><h2>Digital should make business clearer, not more complicated.</h2></div><div className="problem-copy"><p>Many businesses have a website that does not bring in the right opportunities, tools that do not talk to each other, or a growing list of tasks no one has time to own.</p><p>The answer is not always more software, more channels or more activity. It starts with understanding what is getting in the way.</p><Link className="text-link" href="/start-project">Talk through your situation <ArrowUpRight size={17} /></Link></div></div></section>
 
-        <section id="approach" className="new-section approach-section"><div className="shell"><div className="section-intro"><p className="eyebrow">A considered approach</p><h2>Only what your business actually needs.</h2><p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p></div><div className="approach-steps" aria-label="How a project moves from question to delivery">{[["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search], ["Discovery", "We examine requirements, users, existing systems, technical needs, opportunities and constraints.", ClipboardCheck], ["Planning", "We define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]].map(([step, detail, Icon], index) => { const StepIcon = Icon; return <article key={step} className="approach-step"><div className="approach-step-top"><span className="approach-index"><span>STEP</span>{String(index + 1).padStart(2, "0")}</span></div><div className="approach-step-heading"><span className="approach-icon"><StepIcon size={18} strokeWidth={1.8} /></span><h3>{step}</h3></div><p>{detail}</p></article>; })}</div></div></section>
+        <section id="approach" className="new-section approach-section"><div className="shell"><div className="section-intro"><p className="eyebrow">A considered approach</p><h2>Only what your business actually needs.</h2><p>We understand the business, the current situation and the final goal first. Then we recommend the right services and technology—without adding unnecessary pieces.</p></div><div className="approach-steps" aria-label="How a project moves from question to delivery">{[["Discussion", "We understand your business, goals, current situation, expectations and the challenge you want to solve.", Search], ["Discovery", "We examine requirements, users, existing systems, technical needs, opportunities and constraints.", ClipboardCheck], ["Planning", "We define priorities, scope, milestones, responsibilities and the right direction for the work.", SlidersHorizontal], ["Execute", "The agreed work is designed, developed, configured and progressed with clear momentum.", Rocket], ["Review", "We test the work against the requirements, gather feedback and refine what matters.", ClipboardCheck], ["Delivery", "The finished work is finalized, handed over and prepared for launch or everyday use.", Truck], ["Support", "Post-delivery guidance, fixes and ongoing technical support continue where they are useful.", Headphones]].map((item, index) => { const [step, detail, Icon] = item as [string, string, ComponentType<{ size?: number; strokeWidth?: number }>]; const StepIcon = Icon; return <article key={step} className="approach-step"><div className="approach-step-top"><span className="approach-index"><span>STEP</span>{String(index + 1).padStart(2, "0")}</span></div><div className="approach-step-heading"><span className="approach-icon"><StepIcon size={18} strokeWidth={1.8} /></span><h3>{step}</h3></div><p>{detail}</p></article>; })}</div></div></section>
 
         <section id="services" className="new-section services-section"><div className="shell"><div className="section-intro compact"><p className="eyebrow">Capabilities</p><h2>One partner across the digital work.</h2><p>Explore the areas we can bring together when the requirements call for it.</p></div><ServiceExplorer /></div></section>
 

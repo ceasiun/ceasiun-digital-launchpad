@@ -1587,10 +1587,11 @@ blockquote em {
 .approach-step:nth-child(3n)::after, .approach-step:last-child::after { display: none; }
 .approach-step:hover { transform: translateY(-5px); border-color: color-mix(in oklab, var(--primary) 62%, var(--border)); box-shadow: 0 16px 32px color-mix(in oklab, var(--primary) 9%, transparent); }
 .approach-step-top { display: flex; align-items: center; }
-.approach-index { display: inline-flex; align-items: baseline; gap: .45rem; padding: .35rem .5rem; border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--border)); border-radius: .35rem; color: var(--primary); font: 600 .82rem/1 var(--font-mono, monospace); letter-spacing: .08em; background: color-mix(in oklab, var(--primary) 5%, transparent); }
-.approach-index span { color: var(--muted-foreground); font-size: .55rem; letter-spacing: .14em; }
-.approach-icon { display: inline-grid; width: 2.25rem; height: 2.25rem; flex: none; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: .45rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 8%, transparent); transition: transform 220ms ease, background-color 220ms ease; }
-.approach-step:hover .approach-icon { transform: translateY(-2px) rotate(-4deg); background: color-mix(in oklab, var(--primary) 14%, transparent); }
+.approach-index { display: inline-flex; align-items: center; gap: .55rem; padding: .42rem .68rem; border: 1px solid color-mix(in oklab, var(--primary) 38%, var(--border)); border-radius: 999px; color: var(--primary); font: 700 .68rem/1 var(--font-mono, monospace); letter-spacing: .14em; text-transform: uppercase; background: color-mix(in oklab, var(--primary) 7%, var(--card)); box-shadow: inset 0 1px 0 color-mix(in oklab, white 10%, transparent); }
+ .approach-index::before { width: .38rem; height: .38rem; border-radius: 50%; content: ""; background: var(--primary); box-shadow: 0 0 0 .22rem color-mix(in oklab, var(--primary) 12%, transparent); }
+ .approach-index span { color: var(--muted-foreground); font-size: .56rem; letter-spacing: .16em; }
+ .approach-icon { display: inline-grid; width: 2.35rem; height: 2.35rem; flex: none; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: .7rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 8%, transparent); transition: transform 260ms cubic-bezier(.22,1,.36,1), background-color 220ms ease, box-shadow 260ms ease; }
+ .approach-step:hover .approach-icon { transform: translateY(-3px) scale(1.06); background: color-mix(in oklab, var(--primary) 14%, transparent); box-shadow: 0 .5rem 1.2rem color-mix(in oklab, var(--primary) 14%, transparent); }
 .approach-step-heading { display: flex; align-items: flex-start; gap: .75rem; margin-top: 2rem; }
 .approach-steps h3 { margin: .12rem 0 0; font: 600 clamp(1.15rem, 1.8vw, 1.45rem)/1.05 var(--font-display); letter-spacing: -.035em; }
 .approach-steps p, .why-list p { max-width: 34ch; margin: .85rem 0 0 3rem; color: var(--muted-foreground); font-size: .92rem; line-height: 1.6; }
@@ -1701,6 +1702,47 @@ blockquote em {
   @media (max-width: 640px) { .approach-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 3rem; } .approach-step { min-height: 190px; padding: .9rem; } .approach-step h3 { font-size: .98rem; } }
   @media (max-width: 390px) { .approach-steps { grid-template-columns: 1fr; } .approach-step { min-height: 150px; } .approach-stage { margin-top: 1.5rem; } }
 
+  /* Refined approach markers, service icons, and FAQ system */
+  .approach-index {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .55rem;
+    padding: .5rem .75rem;
+    border: 1px solid color-mix(in oklab, var(--primary) 38%, var(--border));
+    border-radius: .65rem;
+    background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 11%, var(--card)), color-mix(in oklab, var(--card) 88%, var(--background)));
+    color: var(--foreground);
+    font: 700 .82rem/1 var(--font-display);
+    letter-spacing: .08em;
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 10%, transparent), 0 8px 20px color-mix(in oklab, var(--background) 35%, transparent);
+  }
+  .approach-index::before { width: .38rem; height: .38rem; margin-right: .1rem; border-radius: 50%; content: ""; background: var(--primary); box-shadow: 0 0 0 .24rem color-mix(in oklab, var(--primary) 13%, transparent); }
+  .approach-index span { color: var(--primary); font: 700 .61rem/1 var(--font-sans); letter-spacing: .16em; }
+  .approach-icon { transform: none !important; transition: color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  .approach-step:hover .approach-icon { transform: translateY(-3px) !important; color: var(--foreground); border-color: var(--primary); background: color-mix(in oklab, var(--primary) 17%, transparent); box-shadow: 0 0 0 .28rem color-mix(in oklab, var(--primary) 8%, transparent), 0 .6rem 1.4rem color-mix(in oklab, var(--primary) 15%, transparent); }
+  .service-card-icon { transform: none !important; transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease; }
+  .service-detail:hover .service-card-icon { transform: translateY(-3px) !important; color: var(--foreground); border-color: var(--primary); background: color-mix(in oklab, var(--primary) 16%, transparent); box-shadow: 0 0 0 .28rem color-mix(in oklab, var(--primary) 8%, transparent); }
+
+  .faq-system { position: relative; display: grid; grid-template-columns: minmax(10rem, .35fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding: 1.1rem; border: 1px solid var(--border); border-radius: 1.1rem; background: linear-gradient(135deg, color-mix(in oklab, var(--card) 92%, var(--primary)), color-mix(in oklab, var(--background) 96%, transparent)); overflow: hidden; }
+  .faq-system::before { position: absolute; inset: 0; pointer-events: none; content: ""; opacity: .26; background-image: linear-gradient(color-mix(in oklab, var(--primary) 16%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 16%, transparent) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(90deg, black, transparent 75%); }
+  .faq-tabs, .faq-list { position: relative; z-index: 1; }
+  .faq-tabs { display: flex; flex-direction: column; gap: .6rem; margin: 0; }
+  .faq-tabs::before { margin: .3rem .2rem .65rem; color: var(--muted-foreground); content: "Browse by topic"; font: 700 .65rem/1 var(--font-sans); letter-spacing: .16em; text-transform: uppercase; }
+  .faq-tabs button { display: inline-flex; align-items: center; justify-content: space-between; gap: .8rem; width: 100%; padding: .9rem 1rem; border: 1px solid transparent; border-radius: .7rem; background: color-mix(in oklab, var(--background) 32%, transparent); color: var(--muted-foreground); font: 650 .88rem/1 var(--font-sans); text-align: left; cursor: pointer; transition: transform 220ms ease, color 220ms ease, background-color 220ms ease, border-color 220ms ease; }
+  .faq-tabs button span { color: var(--primary); font: 700 .68rem/1 var(--font-mono, monospace); }
+  .faq-tabs button.is-active, .faq-tabs button:hover { transform: translateX(4px); border-color: color-mix(in oklab, var(--primary) 42%, var(--border)); background: color-mix(in oklab, var(--primary) 12%, var(--card)); color: var(--foreground); }
+  .faq-list { border-top: 1px solid color-mix(in oklab, var(--border) 80%, transparent); }
+  .faq-item { border-bottom: 1px solid color-mix(in oklab, var(--border) 80%, transparent); animation: faq-reveal 360ms cubic-bezier(.22,1,.36,1) both; }
+  .faq-item button { display: flex; align-items: center; width: 100%; min-height: 4.4rem; padding: 1.15rem .35rem; color: var(--foreground); font-size: clamp(.95rem, 1.5vw, 1.08rem); font-weight: 650; }
+  .faq-item button span { max-width: 38rem; }
+  .faq-item button svg { width: 1.1rem; height: 1.1rem; padding: .18rem; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: 50%; background: color-mix(in oklab, var(--primary) 10%, transparent); transition: transform 220ms ease, background-color 220ms ease; }
+  .faq-item.is-open button svg { transform: rotate(90deg); background: color-mix(in oklab, var(--primary) 22%, transparent); }
+  .faq-item p { padding-right: 2rem; animation: faq-answer-in 300ms ease both; }
+  @keyframes faq-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes faq-answer-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 760px) { .faq-system { grid-template-columns: 1fr; padding: .8rem; } .faq-tabs { display: grid; grid-template-columns: repeat(3, 1fr); } .faq-tabs::before { grid-column: 1 / -1; } .faq-tabs button { padding: .75rem .65rem; font-size: .76rem; } .faq-tabs button span { font-size: .6rem; } .faq-tabs button.is-active, .faq-tabs button:hover { transform: translateY(-2px); } }
+  @media (prefers-reduced-motion: reduce) { .faq-item, .faq-item p { animation: none; } .faq-tabs button, .approach-icon, .service-card-icon { transition: none; } }
+
   .article .byline { margin: 1.5rem 0; line-height: 1.6; }
   .article > img { margin: 1.5rem 0; }
   .prose ul { padding-left: 1.25rem !important; }
@@ -1713,6 +1755,74 @@ blockquote em {
 .footer {
   padding: 5rem 0 1.5rem;
   border-top: 1px solid var(--border);
+}
+
+/* Homepage layout contract: keep cards readable at every viewport. */
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  min-width: 0;
+}
+.service-card-static {
+  display: flex;
+  min-width: 0;
+  min-height: 100%;
+  flex-direction: column;
+  padding: clamp(1.15rem, 2vw, 1.6rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, color-mix(in oklab, var(--card) 95%, var(--primary)), var(--card));
+  color: var(--foreground);
+  text-decoration: none;
+  transition: transform 260ms cubic-bezier(.22,1,.36,1), border-color 220ms ease, box-shadow 260ms ease;
+}
+.service-card-static:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+  box-shadow: 0 18px 34px color-mix(in oklab, var(--primary) 10%, transparent);
+}
+.service-card-heading { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.service-card-heading h3 { min-width: 0; margin: 0; font: 600 clamp(1.05rem, 1.7vw, 1.3rem)/1.15 var(--font-display); }
+.service-card-icon { display: grid; width: 2.35rem; height: 2.35rem; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 42%, var(--border)); border-radius: .7rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 8%, transparent); }
+.service-card-static > p { margin: 1.15rem 0; color: var(--muted-foreground); font-size: .9rem; line-height: 1.6; }
+.service-card-static ul { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.service-card-static li { display: flex; align-items: flex-start; gap: .45rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.4; }
+.service-card-static li svg { flex: 0 0 auto; margin-top: .1rem; color: var(--primary); }
+.service-card-static .card-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; padding-top: 1.25rem; color: var(--primary); font-size: .8rem; font-weight: 700; }
+.service-card-static .card-link svg { transition: transform 220ms ease; }
+.service-card-static:hover .card-link svg { transform: translate(3px, -3px); }
+
+@media (max-width: 1080px) {
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .shell { width: min(calc(100% - 2rem), 1180px); }
+  .new-hero { min-height: min(760px, 100svh); padding: 7rem 0 4rem; }
+  .new-hero h1 { max-width: 12ch; font-size: clamp(3rem, 12vw, 5.5rem); }
+  .hero-lede { max-width: 38rem; }
+  .hero-note { max-width: 28rem; margin-top: 3rem; }
+  .problem-grid, .why-grid, .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .new-section { padding: clamp(4rem, 12vw, 7rem) 0; }
+}
+@media (max-width: 540px) {
+  .shell { width: min(calc(100% - 1.5rem), 1180px); }
+  .new-hero { min-height: 100svh; padding-top: 6rem; }
+  .new-hero h1 { font-size: clamp(2.75rem, 14vw, 4.5rem); letter-spacing: -.07em; }
+  .hero-actions { align-items: stretch; flex-direction: column; gap: .75rem; }
+  .hero-actions .button, .hero-actions .text-link { width: fit-content; }
+  .hero-note { margin-top: 2.25rem; }
+  .trust-grid strong { font-size: clamp(1.75rem, 9vw, 2.5rem); }
+  .service-cards { grid-template-columns: 1fr; }
+  .service-card-static { min-height: 0; }
+  .new-section h2 { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+  .work-placeholder { display: grid; gap: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card-static { transition: none; }
+  .service-card-static:hover { transform: none; }
 }
 .footer-grid {
   display: grid;
@@ -1862,17 +1972,22 @@ blockquote em {
 .hero-grid-mark { display: none !important; }
 .hero-note { position: relative; z-index: 2; }
 .service-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.service-card-static { display: flex; min-height: 290px; flex-direction: column; padding: clamp(1.25rem, 2.2vw, 2rem); border: 1px solid var(--border); border-radius: 1rem; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 92%, var(--primary)), color-mix(in oklab, var(--background) 94%, transparent)); color: var(--foreground); text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in oklab, white 8%, transparent); transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
-.service-card-static:hover { transform: translateY(-8px); border-color: color-mix(in oklab, var(--primary) 58%, var(--border)); box-shadow: 0 20px 45px color-mix(in oklab, var(--primary) 12%, transparent); }
-.service-card-top { display: flex; align-items: center; justify-content: space-between; color: var(--primary); }
-.service-card-top svg { transition: transform .3s ease; }
-.service-card-static:hover .service-card-top svg { transform: translate(4px, -4px); }
-.service-card-static h3 { margin: 2.25rem 0 .8rem; font: 700 clamp(1.25rem, 2vw, 1.7rem)/1.05 var(--font-display); letter-spacing: -.04em; }
-.service-card-static p { margin: 0; color: var(--muted-foreground); line-height: 1.65; }
-.service-card-static ul { display: flex; flex-wrap: wrap; gap: .45rem; margin: 1.25rem 0 1.5rem; padding: 0; list-style: none; }
-.service-card-static li { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .55rem; border: 1px solid var(--border); border-radius: 999px; color: var(--muted-foreground); font-size: .72rem; }
-.service-card-static li svg { color: var(--primary); }
+.service-card-static { display: flex; min-height: 390px; flex-direction: column; padding: clamp(1.35rem, 2.4vw, 2rem); border: 1px solid var(--border); border-radius: 1rem; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 94%, var(--primary)), color-mix(in oklab, var(--background) 96%, transparent)); color: var(--foreground); text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in oklab, white 8%, transparent); transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
+.service-card-static:hover { transform: translateY(-7px); border-color: color-mix(in oklab, var(--primary) 58%, var(--border)); box-shadow: 0 22px 45px color-mix(in oklab, var(--primary) 12%, transparent); }
+.service-card-heading { display: flex; align-items: flex-start; gap: .85rem; min-height: 3.1rem; }
+.service-card-icon { display: grid; flex: 0 0 2.65rem; size: 2.65rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: .75rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, transparent); transition: transform .3s ease, background-color .3s ease; }
+.service-card-static:hover .service-card-icon { transform: translateY(-2px) rotate(-4deg); background: color-mix(in oklab, var(--primary) 16%, transparent); }
+.service-card-static h3 { margin: .15rem 0 0; font: 700 clamp(1.2rem, 1.8vw, 1.55rem)/1.08 var(--font-display); letter-spacing: -.04em; }
+.service-card-static p { max-width: 36ch; margin: 1.35rem 0 1.25rem; color: var(--muted-foreground); line-height: 1.6; }
+.service-card-static ul { display: grid; gap: .65rem; margin: 0 0 1.5rem; padding: 1rem 0; border-block: 1px solid color-mix(in oklab, var(--border) 75%, transparent); list-style: none; }
+.service-card-static li { display: flex; align-items: flex-start; gap: .55rem; color: var(--muted-foreground); font-size: .8rem; line-height: 1.35; }
+.service-card-static li svg { flex: 0 0 auto; margin-top: .1rem; color: var(--primary); }
 .card-link { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; color: var(--primary); font-size: .8rem; font-weight: 700; }
+.card-link svg { transition: transform .25s ease; }
+.service-card-static:hover .card-link svg { transform: translate(3px, -3px); }
+@media (max-width: 1100px) { .service-card-static { min-height: 410px; } }
+@media (max-width: 760px) { .service-card-static { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .service-card-static:hover, .service-card-static:hover .service-card-icon, .service-card-static:hover .card-link svg { transform: none; } }
 .process-line { gap: .8rem; }
 .process-step { min-height: 230px !important; padding: 1rem !important; gap: .75rem !important; border-radius: 1rem !important; background: linear-gradient(145deg, color-mix(in oklab, var(--card) 94%, var(--primary)), var(--background)) !important; }
 .process-icon { display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 1px solid color-mix(in oklab, var(--primary) 48%, var(--border)); border-radius: .75rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, transparent); }
@@ -3468,7 +3583,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ════════���═══════�����══��═════════════════��══���═════════════════════���═══
+/* ════════���═══════�����══��═════════════════��══���═════════════════════����═══
    ADMIN STATUS PILLS
 ══════════════════════════════���════════════��═══════════════════════ */
 .status-pill {
@@ -3621,7 +3736,7 @@ blockquote em {
 
 /* ══════════��═══��═════════════════════════════��═══════════��══════════
    CMS EDITOR — 2-column layout for blog/cases, single col for others
-════════════════════════════���════════════════════════���═════════════ */
+════════════════════════════���══════════════���═════════���═════════════ */
 .cms-editor {
   background: var(--card);
   border: 1px solid var(--border);
