@@ -1702,6 +1702,47 @@ blockquote em {
   @media (max-width: 640px) { .approach-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 3rem; } .approach-step { min-height: 190px; padding: .9rem; } .approach-step h3 { font-size: .98rem; } }
   @media (max-width: 390px) { .approach-steps { grid-template-columns: 1fr; } .approach-step { min-height: 150px; } .approach-stage { margin-top: 1.5rem; } }
 
+  /* Refined approach markers, service icons, and FAQ system */
+  .approach-index {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .55rem;
+    padding: .5rem .75rem;
+    border: 1px solid color-mix(in oklab, var(--primary) 38%, var(--border));
+    border-radius: .65rem;
+    background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 11%, var(--card)), color-mix(in oklab, var(--card) 88%, var(--background)));
+    color: var(--foreground);
+    font: 700 .82rem/1 var(--font-display);
+    letter-spacing: .08em;
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 10%, transparent), 0 8px 20px color-mix(in oklab, var(--background) 35%, transparent);
+  }
+  .approach-index::before { width: .38rem; height: .38rem; margin-right: .1rem; border-radius: 50%; content: ""; background: var(--primary); box-shadow: 0 0 0 .24rem color-mix(in oklab, var(--primary) 13%, transparent); }
+  .approach-index span { color: var(--primary); font: 700 .61rem/1 var(--font-sans); letter-spacing: .16em; }
+  .approach-icon { transform: none !important; transition: color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+  .approach-step:hover .approach-icon { transform: translateY(-3px) !important; color: var(--foreground); border-color: var(--primary); background: color-mix(in oklab, var(--primary) 17%, transparent); box-shadow: 0 0 0 .28rem color-mix(in oklab, var(--primary) 8%, transparent), 0 .6rem 1.4rem color-mix(in oklab, var(--primary) 15%, transparent); }
+  .service-card-icon { transform: none !important; transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease; }
+  .service-detail:hover .service-card-icon { transform: translateY(-3px) !important; color: var(--foreground); border-color: var(--primary); background: color-mix(in oklab, var(--primary) 16%, transparent); box-shadow: 0 0 0 .28rem color-mix(in oklab, var(--primary) 8%, transparent); }
+
+  .faq-system { position: relative; display: grid; grid-template-columns: minmax(10rem, .35fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding: 1.1rem; border: 1px solid var(--border); border-radius: 1.1rem; background: linear-gradient(135deg, color-mix(in oklab, var(--card) 92%, var(--primary)), color-mix(in oklab, var(--background) 96%, transparent)); overflow: hidden; }
+  .faq-system::before { position: absolute; inset: 0; pointer-events: none; content: ""; opacity: .26; background-image: linear-gradient(color-mix(in oklab, var(--primary) 16%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 16%, transparent) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(90deg, black, transparent 75%); }
+  .faq-tabs, .faq-list { position: relative; z-index: 1; }
+  .faq-tabs { display: flex; flex-direction: column; gap: .6rem; margin: 0; }
+  .faq-tabs::before { margin: .3rem .2rem .65rem; color: var(--muted-foreground); content: "Browse by topic"; font: 700 .65rem/1 var(--font-sans); letter-spacing: .16em; text-transform: uppercase; }
+  .faq-tabs button { display: inline-flex; align-items: center; justify-content: space-between; gap: .8rem; width: 100%; padding: .9rem 1rem; border: 1px solid transparent; border-radius: .7rem; background: color-mix(in oklab, var(--background) 32%, transparent); color: var(--muted-foreground); font: 650 .88rem/1 var(--font-sans); text-align: left; cursor: pointer; transition: transform 220ms ease, color 220ms ease, background-color 220ms ease, border-color 220ms ease; }
+  .faq-tabs button span { color: var(--primary); font: 700 .68rem/1 var(--font-mono, monospace); }
+  .faq-tabs button.is-active, .faq-tabs button:hover { transform: translateX(4px); border-color: color-mix(in oklab, var(--primary) 42%, var(--border)); background: color-mix(in oklab, var(--primary) 12%, var(--card)); color: var(--foreground); }
+  .faq-list { border-top: 1px solid color-mix(in oklab, var(--border) 80%, transparent); }
+  .faq-item { border-bottom: 1px solid color-mix(in oklab, var(--border) 80%, transparent); animation: faq-reveal 360ms cubic-bezier(.22,1,.36,1) both; }
+  .faq-item button { display: flex; align-items: center; width: 100%; min-height: 4.4rem; padding: 1.15rem .35rem; color: var(--foreground); font-size: clamp(.95rem, 1.5vw, 1.08rem); font-weight: 650; }
+  .faq-item button span { max-width: 38rem; }
+  .faq-item button svg { width: 1.1rem; height: 1.1rem; padding: .18rem; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); border-radius: 50%; background: color-mix(in oklab, var(--primary) 10%, transparent); transition: transform 220ms ease, background-color 220ms ease; }
+  .faq-item.is-open button svg { transform: rotate(90deg); background: color-mix(in oklab, var(--primary) 22%, transparent); }
+  .faq-item p { padding-right: 2rem; animation: faq-answer-in 300ms ease both; }
+  @keyframes faq-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes faq-answer-in { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 760px) { .faq-system { grid-template-columns: 1fr; padding: .8rem; } .faq-tabs { display: grid; grid-template-columns: repeat(3, 1fr); } .faq-tabs::before { grid-column: 1 / -1; } .faq-tabs button { padding: .75rem .65rem; font-size: .76rem; } .faq-tabs button span { font-size: .6rem; } .faq-tabs button.is-active, .faq-tabs button:hover { transform: translateY(-2px); } }
+  @media (prefers-reduced-motion: reduce) { .faq-item, .faq-item p { animation: none; } .faq-tabs button, .approach-icon, .service-card-icon { transition: none; } }
+
   .article .byline { margin: 1.5rem 0; line-height: 1.6; }
   .article > img { margin: 1.5rem 0; }
   .prose ul { padding-left: 1.25rem !important; }
@@ -3542,7 +3583,7 @@ blockquote em {
   flex-shrink: 0;
 }
 
-/* ════════���═══════�����══��═════════════════��══���═════════════════════���═══
+/* ════════���═══════�����══��═════════════════��══���═════════════════════����═══
    ADMIN STATUS PILLS
 ══════════════════════════════���════════════��═══════════════════════ */
 .status-pill {
