@@ -21,7 +21,7 @@ export function FAQ({ title = "FAQs", subtitle = "Frequently Asked Questions", c
   const questions = faqData[selectedCategory] ?? [];
 
   return (
-    <section className={cn("faq-system", className)} aria-label={title}>
+    <section className={cn("faq-system faq-tabs-component", className)} aria-label={title}>
       <div className="faq-header">
         <span className="eyebrow">{subtitle}</span>
         <h2>{title}</h2>
