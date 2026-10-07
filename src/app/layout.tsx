@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
-import "./styles.css";
+import "../styles.css";
 import { RouteProgress } from "@/components/route-progress";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
