@@ -1825,6 +1825,26 @@ blockquote em {
   .service-card-static:hover { transform: none; }
 }
 
+/* Compact service overview: three cards on desktop, two on mobile. */
+.service-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.65rem, 1.4vw, 1rem); }
+.service-card-static { min-height: 245px; padding: clamp(1rem, 1.8vw, 1.45rem); }
+.service-card-static h3 { margin-top: 2.25rem; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+.service-card-static > p { font-size: .8rem; line-height: 1.45; }
+.service-card-static .card-link { padding-top: .9rem; font-size: .72rem; }
+@media (max-width: 760px) {
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .service-card-static { min-height: 220px; padding: .85rem; border-radius: .85rem; }
+  .service-card-icon { width: 2rem; height: 2rem; }
+  .service-card-number { font-size: .58rem; }
+  .service-card-static h3 { margin-top: 1.7rem; font-size: clamp(1.15rem, 5.3vw, 1.65rem); }
+  .service-card-static > p { margin-top: .8rem; font-size: .72rem; }
+}
+@media (max-width: 380px) {
+  .service-cards { gap: .5rem; }
+  .service-card-static { padding: .72rem; }
+  .service-card-static h3 { font-size: 1.1rem; }
+}
+
 /* Service overview cards: category-led, not capability-list-led. */
 .service-card-static { position: relative; min-height: 285px; padding: clamp(1.35rem, 2.5vw, 2rem); border-radius: 1.15rem; isolation: isolate; }
 .service-card-static::before { position: absolute; z-index: -1; right: -3rem; bottom: -4rem; width: 12rem; height: 12rem; content: ""; border: 1px solid color-mix(in oklab, var(--primary) 24%, transparent); border-radius: 50%; box-shadow: 0 0 0 1.5rem color-mix(in oklab, var(--primary) 4%, transparent), 0 0 0 3rem color-mix(in oklab, var(--primary) 3%, transparent); transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .35s ease; opacity: .75; }
@@ -3661,7 +3681,7 @@ blockquote em {
 
 /* ════════���═══════�����══��═════════════════��══���═════════════════════����═══
    ADMIN STATUS PILLS
-══════════════════════════════���════════════��═══════════════════════ */
+═════════════════════════════������════════════��═══════════════════════ */
 .status-pill {
   font-size: 0.72rem;
   font-weight: 600;
@@ -4329,6 +4349,22 @@ blockquote em {
     transform: none !important;
     filter: none !important;
   }
+}
+
+/* Final service grid overrides: compact cards stay two-up on phones. */
+.service-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.65rem, 1.4vw, 1rem); }
+.service-card-static { min-height: 245px; padding: clamp(1rem, 1.8vw, 1.45rem); }
+.service-card-static h3 { margin-top: 2.25rem; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+@media (max-width: 760px) {
+  .service-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .service-card-static { min-height: 220px; padding: .85rem; border-radius: .85rem; }
+  .service-card-static h3 { margin-top: 1.7rem; font-size: clamp(1.15rem, 5.3vw, 1.65rem); }
+  .service-card-static > p { margin-top: .8rem; font-size: .72rem; }
+}
+@media (max-width: 380px) {
+  .service-cards { gap: .5rem; }
+  .service-card-static { padding: .72rem; }
+  .service-card-static h3 { font-size: 1.1rem; }
 }
 
 /* ---------- Contact Page CTA ---------- */
