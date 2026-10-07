@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Check, ChevronDown, Minus, Plus, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Search, SlidersHorizontal, Rocket, ClipboardCheck, Truck, Headphones } from "lucide-react";
 import { Layout } from "@/components/site";
+import { FAQ } from "@/components/ui/faq-tabs";
 import { services } from "@/lib/site-data";
 import { useEffect, useState } from "react";
 import type { ComponentType } from "react";
@@ -74,20 +75,9 @@ const faqGroups = [
 ];
 
 function Faq() {
-  const [activeGroup, setActiveGroup] = useState(0);
-  const [open, setOpen] = useState(0);
-  const group = faqGroups[activeGroup];
-  return <div className="faq-system">
-    <div className="faq-tabs" role="tablist" aria-label="FAQ categories">
-      {faqGroups.map((item, index) => <button key={item.label} role="tab" aria-selected={activeGroup === index} className={activeGroup === index ? "is-active" : ""} onClick={() => { setActiveGroup(index); setOpen(0); }}>{item.label}<span>{String(item.items.length).padStart(2, "0")}</span></button>)}
-    </div>
-    <div className="faq-list" role="tabpanel">{group.items.map(([question, answer], index) => (
-      <div className={`faq-item ${open === index ? "is-open" : ""}`} key={question}>
-        <button aria-expanded={open === index} onClick={() => setOpen(open === index ? -1 : index)}><span>{question}</span>{open === index ? <Minus size={20} /> : <Plus size={20} />}</button>
-        {open === index && <p>{answer}</p>}
-      </div>
-    ))}</div>
-  </div>;
+  const categories = Object.fromEntries(faqGroups.map((group, index) => [String(index), group.label]));
+  const faqData = Object.fromEntries(faqGroups.map((group, index) => [String(index), group.items.map(([question, answer]) => ({ question, answer }))]));
+  return <FAQ title="Before we begin." subtitle="Questions, answered" categories={categories} faqData={faqData} />;
 }
 
 export default function HomePage() {
