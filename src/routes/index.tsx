@@ -51,16 +51,15 @@ function ServiceExplorer() {
       {serviceAreas.map((service) => {
         const ServiceIcon = service.icon;
         return (
-          <Link className="service-detail service-card-static" href={`/services/${service.slug}`} key={service.title}>
+          <Link className={`service-detail service-card-static service-card-${service.slug}`} href={`/services/${service.slug}`} key={service.title}>
             <div className="service-card-heading">
-              <span className="service-card-icon"><ServiceIcon size={21} strokeWidth={1.7} aria-hidden="true" /></span>
-              <h3>{service.title}</h3>
+              <span className="service-card-icon"><ServiceIcon size={23} strokeWidth={1.7} aria-hidden="true" /></span>
+              <span className="service-card-number">0{serviceAreas.indexOf(service) + 1}</span>
             </div>
+            <h3>{service.title}</h3>
+            <span className="service-card-rule" aria-hidden="true" />
             <p>{service.detail}</p>
-            <ul aria-label={`${service.title} capabilities`}>
-              {service.capabilities.map((capability) => <li key={capability}><Check size={14} strokeWidth={2.2} aria-hidden="true" /><span>{capability}</span></li>)}
-            </ul>
-            <span className="card-link">Explore capability <ArrowUpRight size={16} aria-hidden="true" /></span>
+            <span className="card-link">View service <ArrowUpRight size={16} aria-hidden="true" /></span>
           </Link>
         );
       })}

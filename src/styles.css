@@ -1825,6 +1825,27 @@ blockquote em {
   .service-card-static:hover { transform: none; }
 }
 
+/* Service overview cards: category-led, not capability-list-led. */
+.service-card-static { position: relative; min-height: 285px; padding: clamp(1.35rem, 2.5vw, 2rem); border-radius: 1.15rem; isolation: isolate; }
+.service-card-static::before { position: absolute; z-index: -1; right: -3rem; bottom: -4rem; width: 12rem; height: 12rem; content: ""; border: 1px solid color-mix(in oklab, var(--primary) 24%, transparent); border-radius: 50%; box-shadow: 0 0 0 1.5rem color-mix(in oklab, var(--primary) 4%, transparent), 0 0 0 3rem color-mix(in oklab, var(--primary) 3%, transparent); transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .35s ease; opacity: .75; }
+.service-card-static::after { position: absolute; z-index: -1; top: 0; right: 0; width: 45%; height: 1px; content: ""; background: linear-gradient(90deg, transparent, var(--service-accent, var(--primary))); opacity: .75; }
+.service-card-static:hover::before { transform: scale(1.18); opacity: 1; }
+.service-card-heading { justify-content: space-between; }
+.service-card-number { color: var(--muted-foreground); font: 600 .68rem/1 var(--font-mono, monospace); letter-spacing: .16em; }
+.service-card-static h3 { max-width: 9ch; margin: 3.4rem 0 1.25rem; font: 650 clamp(1.7rem, 3vw, 2.6rem)/.98 var(--font-display); letter-spacing: -.065em; }
+.service-card-rule { display: block; width: 3.2rem; height: 2px; margin-bottom: 1.1rem; background: var(--service-accent, var(--primary)); }
+.service-card-static > p { max-width: 30ch; margin: 0; color: var(--muted-foreground); font-size: .86rem; line-height: 1.55; }
+.service-card-static .card-link { position: relative; z-index: 1; }
+.service-card-website-development { --service-accent: #c98953; }
+.service-card-custom-software { --service-accent: #9cae82; }
+.service-card-branding { --service-accent: #d5ad72; }
+.service-card-social-digital-marketing { --service-accent: #bf7e67; }
+.service-card-ai-automation { --service-accent: #a79cd5; }
+.service-card-cybersecurity { --service-accent: #7fb2b0; }
+.service-card-managed-services { --service-accent: #c5a4cc; }
+@media (max-width: 540px) { .service-card-static { min-height: 250px; } .service-card-static h3 { max-width: 11ch; margin-top: 2.5rem; font-size: clamp(1.8rem, 10vw, 2.5rem); } }
+
+
 /* FAQ tabs component */
 .faq-system { grid-template-columns: minmax(14rem, .38fr) minmax(0, 1fr); align-items: start; gap: clamp(1.5rem, 5vw, 5rem); padding: clamp(1.25rem, 3vw, 2.25rem); border-color: color-mix(in oklab, var(--primary) 24%, var(--border)); background: radial-gradient(circle at 15% 5%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 28%), linear-gradient(135deg, color-mix(in oklab, var(--card) 95%, var(--primary)), var(--background)); }
 .faq-header { position: relative; z-index: 1; min-height: 10rem; }
