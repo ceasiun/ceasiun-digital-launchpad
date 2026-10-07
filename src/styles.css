@@ -4352,6 +4352,23 @@ blockquote em {
   overflow: hidden;
   box-shadow: 0 10px 30px -10px color-mix(in oklab, black 30%, transparent);
 }
+
+/* FAQ surface follows the site background rather than creating a separate panel. */
+.faq-tabs-component {
+  background: var(--background);
+}
+.faq-tabs-component::before {
+  display: none;
+}
+.faq-tabs-component .faq-orbit {
+  background: radial-gradient(ellipse, color-mix(in oklab, var(--primary) 8%, transparent), transparent 68%);
+}
+.faq-tabs-component .faq-item {
+  background: color-mix(in oklab, var(--background) 92%, var(--card));
+}
+.faq-tabs-component .faq-item.is-open {
+  background: color-mix(in oklab, var(--background) 84%, var(--primary));
+}
 @media (min-width: 768px) {
   .location-grid {
     grid-template-columns: 1fr 1.5fr;
