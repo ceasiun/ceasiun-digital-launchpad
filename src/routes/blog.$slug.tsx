@@ -1,0 +1,179 @@
+"use client";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import { Layout} from "@/components/site";
+import { usePost } from "@/components/public-content";
+
+const idFor = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+function RenderProseContent({ body }: { body: string }) {
+  if (!body) return null;
+
+  const lines = body.split("\n");
+  const elements: React.ReactNode[] = [];
+  let currentList: string[] = [];
+
+  const flushList = (keyPrefix: number) => {
+    if (currentList.length > 0) {
+      elements.push(
+        <ul key={`ul-${keyPrefix}`} style={{ paddingLeft: "1.5rem", margin: "1rem 0" }}>
+          {currentList.map((item, i) => (
+            <li key={i} style={{ margin: "0.4rem 0" }}>
+              {item}
+            </li>
+          ))}
+        </ul>,
+      );
+      currentList = [];
+    }
+  };
+
+  lines.forEach((line, idx) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+      currentList.push(trimmed.slice(2));
+      return;
+    }
+
+    flushList(idx);
+
+    if (trimmed.startsWith("### ")) {
+      const title = trimmed.slice(4);
+      elements.push(
+        <h3 id={idFor(title)} key={idx} style={{ fontSize: "1.4rem", margin: "2rem 0 1rem", scrollMarginTop: "7rem" }}>
+          {title}
+        </h3>,
+      );
+    } else if (trimmed.startsWith("## ")) {
+      const title = trimmed.slice(3);
+      elements.push(
+        <h2 id={idFor(title)} key={idx} style={{ fontSize: "1.8rem", margin: "2.5rem 0 1rem", scrollMarginTop: "7rem" }}>
+          {title}
+        </h2>,
+      );
+    } else if (trimmed.startsWith("> ")) {
+      elements.push(
+        <blockquote
+          key={idx}
+          style={{
+            borderLeft: "3px solid var(--primary)",
+            paddingLeft: "1rem",
+            margin: "1.5rem 0",
+            fontStyle: "italic",
+          }}
+        >
+          {trimmed.slice(2)}
+        </blockquote>,
+      );
+    } else if (trimmed.length > 0) {
+      elements.push(
+        <p key={idx} style={{ margin: "1.2rem 0", lineHeight: "1.8" }}>
+          {trimmed}
+        </p>,
+      );
+    }
+  });
+
+  flushList(lines.length);
+
+  return <div className="prose">{elements}</div>;
+}
+
+export default function BlogPostPage({ slug }: { slug: string }) {
+  const post = usePost(slug);
+  const [activeId, setActiveId] = useState("");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveId(window.location.hash.slice(1));
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    if (window.location.hash) {
+      handleHashChange();
+    }
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  if (post === undefined) {
+    return <div className="loading">Loading article...</div>;
+  }
+
+  if (!post) {
+    return (
+      <Layout>
+        <div className="section shell" style={{ paddingTop: "10rem" }}>
+          <h1>Insight Article Not Found</h1>
+          <p style={{ margin: "1.5rem 0" }}>
+            The article you are looking for does not exist or has been removed.
+          </p>
+          <Link  href="/blog">Return to Insights</Link>
+        </div>
+      </Layout>
+    );
+  }
+
+  return (
+    <Layout>
+      <article className="article shell">
+        <Link  href="/blog">
+          <ArrowLeft /> All Insights
+        </Link>
+        <p className="eyebrow">{post.category}</p>
+        <h1>{post.title}</h1>
+        <p className="lede">{post.excerpt}</p>
+
+        <div className="byline">
+          By {post.author}
+          {post.published_at &&
+            ` - ${new Date(post.published_at).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}`}
+        </div>
+
+        {post.cover_url && (
+          <img
+            src={post.cover_url}
+            alt={post.title}
+            style={{ width: "100%", borderRadius: "8px" }}
+          />
+        )}
+        {(() => {
+          const media = (post as typeof post & { media_urls?: string | string[] }).media_urls;
+          const urls = Array.isArray(media) ? media : media?.split("\\n").map((url) => url.trim()).filter(Boolean) ?? [];
+          return urls.map((url, index) => <img key={`${url}-${index}`} src={url} alt={`${post.title} illustration ${index + 1}`} className="article-media" />);
+        })()}
+
+        <div className="blog-reading-layout">
+          <aside className="legal-toc">
+            <p className="eyebrow">On this page</p>
+            {post.body
+              .split("\n")
+              .filter((line) => line.trim().startsWith("## "))
+              .map((line) => line.trim().slice(3))
+              .map((title) => {
+                const id = idFor(title);
+                return (
+                  <a 
+                    key={title} 
+                    href={`#${id}`}
+                    className={activeId === id ? "active" : ""}
+                    onClick={() => setActiveId(id)}
+                  >
+                    {title}
+                  </a>
+                );
+              })}
+          </aside>
+          {/* <BlogSidebar headings={post.body.split("\n").filter((line) => line.trim().startsWith("## ")).map((line) => line.trim().slice(3))} /> */}
+          <div className="blog-reading-content">
+            <RenderProseContent body={post.body} />
+          </div>
+        </div>
+      </article>
+    </Layout>
+  );
+}
