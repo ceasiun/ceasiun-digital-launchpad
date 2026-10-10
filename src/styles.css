@@ -2938,6 +2938,7 @@ blockquote em {
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
+
 /* Process cards and client proof */
 .process-line { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.75rem; margin-top: 3rem; }
 .process-line::before { content: ""; position: absolute; top: 2.25rem; left: 2.25rem; right: 2.25rem; border-top: 1px dashed color-mix(in srgb, var(--primary) 55%, transparent); pointer-events: none; }
@@ -3118,9 +3119,8 @@ blockquote em {
     width: 100%;
     justify-content: center;
   }
-}
 
-/* ==========================================================================
+/* ========================================================================== 
    Advanced Admin Command Center Styles
    ========================================================================== */
 
