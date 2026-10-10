@@ -2938,6 +2938,7 @@ blockquote em {
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
+
 /* Process cards and client proof */
 .process-line { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.75rem; margin-top: 3rem; }
 .process-line::before { content: ""; position: absolute; top: 2.25rem; left: 2.25rem; right: 2.25rem; border-top: 1px dashed color-mix(in srgb, var(--primary) 55%, transparent); pointer-events: none; }
@@ -2968,6 +2969,44 @@ blockquote em {
 .google-review-card .card-link { align-self: flex-start; }
 @media (max-width: 1000px) { .process-line { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; } .process-line::before { display: none; } .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .testimonial-featured { grid-column: 1 / -1; } }
 @media (max-width: 640px) { .process-line { grid-template-columns: repeat(2, 1fr); margin-top: 2rem; } .process-step { min-height: 12rem; } .testimonial-grid { grid-template-columns: 1fr; } .testimonial-featured { grid-column: auto; } .testimonial-card, .google-review-card { min-height: 15rem; } }
+
+/* Desktop review layout: keep the full review surface visible and balanced. */
+@media (min-width: 1001px) {
+  .testimonials-section .shell { width: min(calc(100% - 5rem), 1180px); }
+  .testimonials-section .section-intro { max-width: 48rem; }
+  .testimonials-section .testimonial-grid { grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(0, 1fr)); align-items: stretch; gap: clamp(1rem, 1.8vw, 1.5rem); margin-top: 2.75rem; }
+  .testimonials-section .testimonial-card { min-width: 0; min-height: 21rem; padding: clamp(1.5rem, 2.4vw, 2.25rem); }
+  .testimonials-section .testimonial-featured { grid-column: auto; }
+  .testimonials-section .testimonial-card blockquote { max-width: 34rem; }
+  .testimonials-section .google-review-card { min-height: 21rem; }
+}
+@media (min-width: 1280px) {
+  .testimonials-section .testimonial-grid { gap: 1.75rem; }
+  .testimonials-section .testimonial-card { min-height: 23rem; }
+}
+
+/* Review section responsive correction for the compact preview/tablet range. */
+@media (max-width: 760px) {
+  .testimonials-section { overflow: hidden; }
+  .testimonials-section .shell { width: min(calc(100% - 2rem), 680px); }
+  .testimonials-section .section-intro { max-width: 100%; }
+  .testimonials-section .section-intro h2 { max-width: 12ch; margin-top: .65rem; font-size: clamp(2.25rem, 8.6vw, 3.6rem); line-height: .98; letter-spacing: -.065em; }
+  .testimonials-section .section-intro > p:last-child { max-width: 34rem; margin-top: 1.25rem; font-size: .95rem; line-height: 1.55; }
+  .testimonials-section .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: .85rem; margin-top: 2rem; }
+  .testimonials-section .testimonial-card, .testimonials-section .google-review-card { min-width: 0; min-height: 0; padding: 1.2rem; border-radius: .85rem; }
+  .testimonials-section .testimonial-card blockquote { margin: .75rem 0 1.5rem; font-size: clamp(1.05rem, 4.4vw, 1.35rem); line-height: 1.18; }
+  .testimonials-section .testimonial-card figcaption { font-size: .75rem; }
+  .testimonials-section .google-review-card { gap: 2rem; }
+  .testimonials-section .google-score strong { font-size: 2.8rem; }
+}
+@media (min-width: 761px) and (max-width: 1000px) {
+  .testimonials-section .section-intro h2 { max-width: 18ch; font-size: clamp(2.7rem, 5vw, 4.2rem); }
+  .testimonials-section .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .testimonials-section .testimonial-featured { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-section .testimonial-card, .testimonials-section .google-review-card { transition: none; }
+}
 
 .page-intro {
 
@@ -3082,7 +3121,7 @@ blockquote em {
   }
 }
 
-/* ==========================================================================
+/* ========================================================================== 
    Advanced Admin Command Center Styles
    ========================================================================== */
 
