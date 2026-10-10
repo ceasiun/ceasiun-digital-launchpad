@@ -2969,6 +2969,21 @@ blockquote em {
 @media (max-width: 1000px) { .process-line { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; } .process-line::before { display: none; } .testimonial-grid { grid-template-columns: repeat(2, 1fr); } .testimonial-featured { grid-column: 1 / -1; } }
 @media (max-width: 640px) { .process-line { grid-template-columns: repeat(2, 1fr); margin-top: 2rem; } .process-step { min-height: 12rem; } .testimonial-grid { grid-template-columns: 1fr; } .testimonial-featured { grid-column: auto; } .testimonial-card, .google-review-card { min-height: 15rem; } }
 
+/* Desktop review layout: keep the full review surface visible and balanced. */
+@media (min-width: 1001px) {
+  .testimonials-section .shell { width: min(calc(100% - 5rem), 1180px); }
+  .testimonials-section .section-intro { max-width: 48rem; }
+  .testimonials-section .testimonial-grid { grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(0, 1fr)); align-items: stretch; gap: clamp(1rem, 1.8vw, 1.5rem); margin-top: 2.75rem; }
+  .testimonials-section .testimonial-card { min-width: 0; min-height: 21rem; padding: clamp(1.5rem, 2.4vw, 2.25rem); }
+  .testimonials-section .testimonial-featured { grid-column: auto; }
+  .testimonials-section .testimonial-card blockquote { max-width: 34rem; }
+  .testimonials-section .google-review-card { min-height: 21rem; }
+}
+@media (min-width: 1280px) {
+  .testimonials-section .testimonial-grid { gap: 1.75rem; }
+  .testimonials-section .testimonial-card { min-height: 23rem; }
+}
+
 .page-intro {
 
     padding-top: calc(76px + 2.5rem);
